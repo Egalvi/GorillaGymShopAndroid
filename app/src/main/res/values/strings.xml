@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Gorilla Gym Shop</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_product_list">ProductList</string>
+    <string name="title_activity_product_details">ProductDetails</string>
+</resources>
