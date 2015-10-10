@@ -4,12 +4,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
+import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import ru.egalvi.shop.CartItem;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 import ru.egalvi.shop.gorillagym.service.ProductService;
@@ -17,20 +22,27 @@ import ru.egalvi.shop.service.impl.TestProductService;
 
 public class CartActivity extends AppCompatActivity {
 
+
+    //TODO check
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart);
-
-        final ListView lv = (ListView) findViewById(R.id.productView);
-
-        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            ArrayAdapter<Product> arrayAdapter = new ProductAdapter(this,
-//                    R.layout.product_list_item,
-//                    products, category);
-//            lv.setAdapter(arrayAdapter);
-//        }
+        TextView cartMessage = (TextView) findViewById(R.id.cartMessage);
+        Button checkoutButton = (Button) findViewById(R.id.checkout_button);
+        if (CartHolder.getCart().getOrder().isEmpty()) {
+            checkoutButton.setVisibility(View.INVISIBLE);
+            cartMessage.setVisibility(View.VISIBLE);
+            cartMessage.setText("Cart is empty");//TODO i18n
+        } else {
+            checkoutButton.setVisibility(View.VISIBLE);
+            cartMessage.setVisibility(View.INVISIBLE);
+            final ListView lv = (ListView) findViewById(R.id.addedProductView);
+            ArrayAdapter<CartItem> arrayAdapter = new CartAdapter(this,
+                    R.layout.product_list_item,
+                    CartHolder.getCart().getOrder());
+            lv.setAdapter(arrayAdapter);
+        }
     }
 
     @Override

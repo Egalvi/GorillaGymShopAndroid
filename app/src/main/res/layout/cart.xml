@@ -8,9 +8,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kg.gorillagym.gorillagymshop.CartActivity">
 
-    <ListView
+    <TextView
+        android:id="@+id/cartMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addedProductView" />
+        android:visibility="invisible" />
+
+    <ListView
+        android:id="@+id/addedProductView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/checkout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"/>
 
 </RelativeLayout>

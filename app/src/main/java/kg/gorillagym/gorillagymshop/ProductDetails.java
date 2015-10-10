@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.PriorityQueue;
+
+import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
@@ -14,6 +19,7 @@ import ru.egalvi.shop.gorillagym.model.Product;
 public class ProductDetails extends AppCompatActivity {
 
     private Category category;
+    private Product product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +32,21 @@ public class ProductDetails extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            Product product = (Product) extras.getSerializable("PRODUCT");
+            product = (Product) extras.getSerializable("PRODUCT");
             category = (Category) extras.getSerializable("CATEGORY");
             name.setText(product.getName());
             //TODO to set image
             image.setImageDrawable(getDrawable(R.drawable.tst));
             description.setText(product.getDescription());
         }
+
+        Button addToCart = (Button) findViewById(R.id.add_to_cart);
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartHolder.getCart().add(product, 1);
+            }
+        });
     }
 
     @Override
