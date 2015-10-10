@@ -3,6 +3,7 @@ package kg.gorillagym.gorillagymshop.navigation;
 import android.app.Activity;
 import android.content.Intent;
 
+import kg.gorillagym.gorillagymshop.CartActivity;
 import kg.gorillagym.gorillagymshop.MainActivity;
 import kg.gorillagym.gorillagymshop.ProductDetails;
 import kg.gorillagym.gorillagymshop.ProductList;
@@ -18,7 +19,8 @@ public class Navigator {
     }
 
     public static void goToCart(Activity activity) {
-
+        Intent intent = new Intent(activity, CartActivity.class);
+        activity.startActivity(intent);
     }
 
     public static void goToCategories(Activity activity) {

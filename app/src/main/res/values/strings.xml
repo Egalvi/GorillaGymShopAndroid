@@ -9,4 +9,7 @@
     <string name="menu_action_categories">Back to categories</string>
     <string name="menu_action_products">Back to products</string>
     <string name="menu_action_cart">Cart</string>
+    <string name="title_activity_cart">CartActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
