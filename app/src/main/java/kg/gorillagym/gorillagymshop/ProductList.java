@@ -9,12 +9,15 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 import ru.egalvi.shop.gorillagym.service.ProductService;
 import ru.egalvi.shop.service.impl.TestProductService;
 
 public class ProductList extends AppCompatActivity {
+
+    private Category category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +28,12 @@ public class ProductList extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            Category category = (Category) extras.getSerializable("CATEGORY");
+            category = (Category) extras.getSerializable("CATEGORY");
             ProductService productService = new TestProductService();
             List<Product> products = productService.getForCategory(category);
             ArrayAdapter<Product> arrayAdapter = new ProductAdapter(this,
                     R.layout.product_list_item,
-                    products);
+                    products, category);
 
             lv.setAdapter(arrayAdapter);
         }
@@ -49,12 +52,15 @@ public class ProductList extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_cart:
+                Navigator.goToCart(this);
+                return true;
+            case R.id.action_categories:
+                Navigator.goToCategories(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

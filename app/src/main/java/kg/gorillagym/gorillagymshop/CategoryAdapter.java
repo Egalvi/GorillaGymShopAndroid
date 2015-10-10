@@ -2,7 +2,6 @@ package kg.gorillagym.gorillagymshop;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.Button;
 
 import java.util.List;
 
+import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
 
 public class CategoryAdapter extends ArrayAdapter<Category> {
@@ -33,9 +33,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, ProductList.class);
-                intent.putExtra("CATEGORY", category);
-                activity.startActivity(intent);
+                Navigator.goToProducts(activity, category);
             }
         });
         return convertView;

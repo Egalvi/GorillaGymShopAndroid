@@ -7,9 +7,13 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 
 public class ProductDetails extends AppCompatActivity {
+
+    private Category category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,7 @@ public class ProductDetails extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Product product = (Product) extras.getSerializable("PRODUCT");
+            category = (Category) extras.getSerializable("CATEGORY");
             name.setText(product.getName());
             //TODO to set image
             image.setImageDrawable(getDrawable(R.drawable.tst));
@@ -43,12 +48,18 @@ public class ProductDetails extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_cart:
+                Navigator.goToCart(this);
+                return true;
+            case R.id.action_categories:
+                Navigator.goToCategories(this);
+                return true;
+            case R.id.action_products:
+                Navigator.goToProducts(this, category);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }
