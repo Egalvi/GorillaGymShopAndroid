@@ -42,6 +42,8 @@ public class CartActivity extends AppCompatActivity {
                     R.layout.product_list_item,
                     CartHolder.getCart().getOrder());
             lv.setAdapter(arrayAdapter);
+            TextView price = (TextView) findViewById(R.id.cart_total_price);
+            price.setText(String.valueOf(CartHolder.getCart().getTotalPrice()));
         }
     }
 
