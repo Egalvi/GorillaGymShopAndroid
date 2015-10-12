@@ -7,6 +7,9 @@
     <!-- Cart activity-->
     <string name="button_checkout">Checkout</string>
 
+    <!-- Product list-->
+    <string name="currency">Som</string>
+
     <!-- Menu constants -->
     <string name="action_settings">Settings</string>
     <string name="menu_action_categories">Back to categories</string>

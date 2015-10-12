@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
                 Navigator.goToProductDetails(activity, category, product);
             }
         });
+        TextView price = (TextView) convertView.findViewById(R.id.product_price);
+        price.setText(String.valueOf(product.getPrice()));
         return convertView;
     }
 }
