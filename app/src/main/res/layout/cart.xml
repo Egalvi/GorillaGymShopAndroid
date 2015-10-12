@@ -24,7 +24,7 @@
         android:id="@+id/checkout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Checkout"
+        android:text="@string/button_checkout"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp" />
 
