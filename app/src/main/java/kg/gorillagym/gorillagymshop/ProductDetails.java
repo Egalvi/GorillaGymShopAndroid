@@ -29,6 +29,7 @@ public class ProductDetails extends AppCompatActivity {
         final TextView name = (TextView) findViewById(R.id.product_name);
         final ImageView image = (ImageView) findViewById(R.id.product_image);
         final TextView description = (TextView) findViewById(R.id.product_description);
+        final TextView price = (TextView) findViewById(R.id.product_price);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -38,6 +39,7 @@ public class ProductDetails extends AppCompatActivity {
             //TODO to set image
             image.setImageDrawable(getDrawable(R.drawable.tst));
             description.setText(product.getDescription());
+            price.setText(product.getPrice() + " " + getString(R.string.currency));
         }
 
         Button addToCart = (Button) findViewById(R.id.add_to_cart);

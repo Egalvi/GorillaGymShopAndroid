@@ -38,4 +38,11 @@
         android:layout_marginBottom="0dp"
         android:text="Положить в корзину" />
 
+    <TextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/add_to_cart"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
