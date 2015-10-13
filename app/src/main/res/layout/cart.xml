@@ -21,6 +21,11 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:text="@string/total_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
         android:id="@+id/cart_total_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -6,6 +6,7 @@
 
     <!-- Cart activity-->
     <string name="button_checkout">Checkout</string>
+    <string name="total_price">Total price</string>
 
     <!-- Product list-->
     <string name="currency">Som</string>
