@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import kg.gorillagym.gorillagymshop.CartActivity;
+import kg.gorillagym.gorillagymshop.ContactDetails;
 import kg.gorillagym.gorillagymshop.MainActivity;
 import kg.gorillagym.gorillagymshop.ProductDetails;
 import kg.gorillagym.gorillagymshop.ProductList;
@@ -25,6 +26,11 @@ public class Navigator {
 
     public static void goToCategories(Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
+    }
+
+    public static void goToContactDetails(Activity activity) {
+        Intent intent = new Intent(activity, ContactDetails.class);
         activity.startActivity(intent);
     }
 

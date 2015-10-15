@@ -44,6 +44,12 @@ public class CartActivity extends AppCompatActivity {
             lv.setAdapter(arrayAdapter);
             TextView price = (TextView) findViewById(R.id.cart_total_price);
             price.setText(String.valueOf(CartHolder.getCart().getTotalPrice()));
+            checkoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigator.goToContactDetails(CartActivity.this);
+                }
+            });
         }
     }
 
