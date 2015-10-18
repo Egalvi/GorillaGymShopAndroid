@@ -43,7 +43,7 @@ public class CartActivity extends AppCompatActivity {
                     CartHolder.getCart().getOrder());
             lv.setAdapter(arrayAdapter);
             TextView price = (TextView) findViewById(R.id.cart_total_price);
-            price.setText(String.valueOf(CartHolder.getCart().getTotalPrice()));
+            price.setText(String.valueOf(CartHolder.getCart().getTotalPrice()) + " " + getString(R.string.currency));
             checkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -49,7 +49,7 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
         TextView pricePerItem = (TextView) convertView.findViewById(R.id.cart_price_per_item);
         pricePerItem.setText(String.valueOf(product.getPrice()));
         TextView price = (TextView) convertView.findViewById(R.id.cart_item_sum);
-        price.setText(String.valueOf(product.getPrice() * itemQuantity));
+        price.setText(String.valueOf(product.getPrice() * itemQuantity) + " " + activity.getString(R.string.currency));
         return convertView;
     }
 }
