@@ -42,7 +42,7 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
         final Product product = (Product) getItem(position); //TODO possibly unsafe cast
         text.setText(product.getName());
-        image.setImageDrawable(activity.getDrawable(R.drawable.tst));
+        image.setImageDrawable(activity.getResources().getDrawable(R.drawable.tst));
         TextView quantity = (TextView) convertView.findViewById(R.id.cart_quantity);
         Integer itemQuantity = productsInCart.get(product);
         quantity.setText(String.valueOf(itemQuantity));

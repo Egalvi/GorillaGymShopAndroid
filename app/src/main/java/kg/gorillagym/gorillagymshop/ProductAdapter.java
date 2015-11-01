@@ -37,7 +37,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
         final Product product = getItem(position);
         text.setText(product.getName());
-        image.setImageDrawable(activity.getDrawable(R.drawable.tst));
+        image.setImageDrawable(activity.getResources().getDrawable(R.drawable.tst));
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

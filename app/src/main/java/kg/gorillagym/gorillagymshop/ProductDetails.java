@@ -37,7 +37,7 @@ public class ProductDetails extends AppCompatActivity {
             category = (Category) extras.getSerializable("CATEGORY");
             name.setText(product.getName());
             //TODO to set image
-            image.setImageDrawable(getDrawable(R.drawable.tst));
+            image.setImageDrawable(getResources().getDrawable(R.drawable.tst));
             description.setText(product.getDescription());
             price.setText(product.getPrice() + " " + getString(R.string.currency));
         }
