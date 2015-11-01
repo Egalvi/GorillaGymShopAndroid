@@ -20,4 +20,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_contact_details">ContactDetails</string>
+    <string name="title_activity_number_field">NumberField</string>
 </resources>
