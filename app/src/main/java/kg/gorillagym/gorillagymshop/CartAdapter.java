@@ -47,7 +47,7 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
         text.setText(product.getName());
         image.setImageDrawable(activity.getResources().getDrawable(R.drawable.tst));
 //        MyNumberField quantity = (MyNumberField) convertView.findViewById(R.id.cart_quantity);
-        final Integer itemQuantity = productsInCart.get(product);
+        Integer itemQuantity = productsInCart.get(product);
 //        quantity.setValue(itemQuantity);
         TextView pricePerItem = (TextView) convertView.findViewById(R.id.cart_price_per_item);
         pricePerItem.setText(String.valueOf(product.getPrice()));
@@ -68,7 +68,7 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
                 value.getText().append(String.valueOf(quantity + 1));
                 CartHolder.getCart().add(product, 1);
                 ((CartActivity) activity).updateCartView();
-                price.setText(String.valueOf(product.getPrice() * itemQuantity) + " " + activity.getString(R.string.currency));
+                price.setText(String.valueOf(product.getPrice() * productsInCart.get(product)) + " " + activity.getString(R.string.currency));
             }
         });
         minusBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
                 value.getText().append(String.valueOf(quantity - 1));
                 CartHolder.getCart().remove(product, 1);
                 ((CartActivity) activity).updateCartView();
-                price.setText(String.valueOf(product.getPrice() * itemQuantity) + " " + activity.getString(R.string.currency));
+                price.setText(String.valueOf(product.getPrice() * productsInCart.get(product)) + " " + activity.getString(R.string.currency));
             }
         });
 
