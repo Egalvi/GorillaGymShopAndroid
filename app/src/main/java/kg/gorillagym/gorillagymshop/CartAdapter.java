@@ -16,6 +16,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 
+import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import kg.gorillagym.gorillagymshop.numberpicker.MyNumberField;
 import ru.egalvi.shop.CartItem;
@@ -46,11 +47,11 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
         text.setText(product.getName());
         image.setImageDrawable(activity.getResources().getDrawable(R.drawable.tst));
 //        MyNumberField quantity = (MyNumberField) convertView.findViewById(R.id.cart_quantity);
-        Integer itemQuantity = productsInCart.get(product);
+        final Integer itemQuantity = productsInCart.get(product);
 //        quantity.setValue(itemQuantity);
         TextView pricePerItem = (TextView) convertView.findViewById(R.id.cart_price_per_item);
         pricePerItem.setText(String.valueOf(product.getPrice()));
-        TextView price = (TextView) convertView.findViewById(R.id.cart_item_sum);
+        final TextView price = (TextView) convertView.findViewById(R.id.cart_item_sum);
         price.setText(String.valueOf(product.getPrice() * itemQuantity) + " " + activity.getString(R.string.currency));
 
         final EditText value = getValueEdit(convertView);
@@ -65,6 +66,9 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
                 Integer quantity = Integer.valueOf(value.getText().toString());
                 value.getText().clear();
                 value.getText().append(String.valueOf(quantity + 1));
+                CartHolder.getCart().add(product, 1);
+                ((CartActivity) activity).updateCartView();
+                price.setText(String.valueOf(product.getPrice() * itemQuantity) + " " + activity.getString(R.string.currency));
             }
         });
         minusBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +77,9 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
                 Integer quantity = Integer.valueOf(value.getText().toString());
                 value.getText().clear();
                 value.getText().append(String.valueOf(quantity - 1));
+                CartHolder.getCart().remove(product, 1);
+                ((CartActivity) activity).updateCartView();
+                price.setText(String.valueOf(product.getPrice() * itemQuantity) + " " + activity.getString(R.string.currency));
             }
         });
 
