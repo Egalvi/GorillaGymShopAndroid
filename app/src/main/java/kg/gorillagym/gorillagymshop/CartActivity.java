@@ -33,10 +33,12 @@ public class CartActivity extends AppCompatActivity {
         if (CartHolder.getCart().getOrder().isEmpty()) {
             checkoutButton.setVisibility(View.INVISIBLE);
             cartMessage.setVisibility(View.VISIBLE);
+            cartMessage.setHeight(50);
             cartMessage.setText("Cart is empty");//TODO i18n
         } else {
             checkoutButton.setVisibility(View.VISIBLE);
             cartMessage.setVisibility(View.INVISIBLE);
+            cartMessage.setHeight(0);
             final ListView lv = (ListView) findViewById(R.id.addedProductView);
             ArrayAdapter<CartItem> arrayAdapter = new CartAdapter(this,
                     R.layout.product_list_item,
