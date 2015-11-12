@@ -7,48 +7,61 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.List;
 
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.CartItem;
-import ru.egalvi.shop.gorillagym.model.Category;
-import ru.egalvi.shop.gorillagym.model.Product;
-import ru.egalvi.shop.gorillagym.service.ProductService;
-import ru.egalvi.shop.service.impl.TestProductService;
 
 public class CartActivity extends AppCompatActivity {
 
 
     //TODO check
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart);
+        updateCartView();
+    }
+
+    private void updateCartView() {
         TextView cartMessage = (TextView) findViewById(R.id.cartMessage);
         Button checkoutButton = (Button) findViewById(R.id.checkout_button);
+        Button clearCartButton = (Button) findViewById(R.id.clear_cart_button);
+        LinearLayout totalHolder = (LinearLayout) findViewById(R.id.layout_total_holder);
+        final ListView lv = (ListView) findViewById(R.id.addedProductView);
         if (CartHolder.getCart().getOrder().isEmpty()) {
             checkoutButton.setVisibility(View.GONE);
+            clearCartButton.setVisibility(View.GONE);
+            totalHolder.setVisibility(View.GONE);
             cartMessage.setVisibility(View.VISIBLE);
             cartMessage.setHeight(50);
             cartMessage.setText("Cart is empty");//TODO i18n
+            lv.setAdapter(null);
         } else {
             checkoutButton.setVisibility(View.VISIBLE);
+            clearCartButton.setVisibility(View.VISIBLE);
+            totalHolder.setVisibility(View.VISIBLE);
             cartMessage.setVisibility(View.GONE);
             cartMessage.setHeight(0);
-            final ListView lv = (ListView) findViewById(R.id.addedProductView);
             ArrayAdapter<CartItem> arrayAdapter = new CartAdapter(this,
                     R.layout.product_list_item,
                     CartHolder.getCart().getOrder());
             lv.setAdapter(arrayAdapter);
-            updateCartView();
+            updateTotalPrice();
             checkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Navigator.goToContactDetails(CartActivity.this);
+                }
+            });
+            clearCartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CartHolder.getCart().clear();
+                    updateCartView();
                 }
             });
         }
@@ -76,7 +89,7 @@ public class CartActivity extends AppCompatActivity {
         }
     }
 
-    public void updateCartView() {
+    public void updateTotalPrice() {
         TextView price = (TextView) findViewById(R.id.cart_total_price);
         price.setText(String.valueOf(CartHolder.getCart().getTotalPrice()) + " " + getString(R.string.currency));
     }

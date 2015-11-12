@@ -12,15 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Map;
 
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
-import kg.gorillagym.gorillagymshop.navigation.Navigator;
-import kg.gorillagym.gorillagymshop.numberpicker.MyNumberField;
 import ru.egalvi.shop.CartItem;
-import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 
 //TODO change it
@@ -67,7 +62,7 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
                 value.getText().clear();
                 value.getText().append(String.valueOf(quantity + 1));
                 CartHolder.getCart().add(product, 1);
-                ((CartActivity) activity).updateCartView();
+                ((CartActivity) activity).updateTotalPrice();
                 price.setText(String.valueOf(product.getPrice() * productsInCart.get(product)) + " " + activity.getString(R.string.currency));
             }
         });
@@ -78,7 +73,7 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
                 value.getText().clear();
                 value.getText().append(String.valueOf(quantity - 1));
                 CartHolder.getCart().remove(product, 1);
-                ((CartActivity) activity).updateCartView();
+                ((CartActivity) activity).updateTotalPrice();
                 price.setText(String.valueOf(product.getPrice() * productsInCart.get(product)) + " " + activity.getString(R.string.currency));
             }
         });
