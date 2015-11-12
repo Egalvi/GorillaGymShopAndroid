@@ -31,13 +31,13 @@ public class CartActivity extends AppCompatActivity {
         TextView cartMessage = (TextView) findViewById(R.id.cartMessage);
         Button checkoutButton = (Button) findViewById(R.id.checkout_button);
         if (CartHolder.getCart().getOrder().isEmpty()) {
-            checkoutButton.setVisibility(View.INVISIBLE);
+            checkoutButton.setVisibility(View.GONE);
             cartMessage.setVisibility(View.VISIBLE);
             cartMessage.setHeight(50);
             cartMessage.setText("Cart is empty");//TODO i18n
         } else {
             checkoutButton.setVisibility(View.VISIBLE);
-            cartMessage.setVisibility(View.INVISIBLE);
+            cartMessage.setVisibility(View.GONE);
             cartMessage.setHeight(0);
             final ListView lv = (ListView) findViewById(R.id.addedProductView);
             ArrayAdapter<CartItem> arrayAdapter = new CartAdapter(this,
