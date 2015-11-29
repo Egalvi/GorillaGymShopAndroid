@@ -10,8 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.PriorityQueue;
-
+import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
@@ -28,7 +27,6 @@ public class ProductDetails extends AppCompatActivity {
         setContentView(R.layout.product_details);
 
         final TextView name = (TextView) findViewById(R.id.product_name);
-        final ImageView image = (ImageView) findViewById(R.id.product_image);
         final TextView description = (TextView) findViewById(R.id.product_description);
         final TextView price = (TextView) findViewById(R.id.product_price);
 
@@ -37,8 +35,7 @@ public class ProductDetails extends AppCompatActivity {
             product = (Product) extras.getSerializable("PRODUCT");
             category = (Category) extras.getSerializable("CATEGORY");
             name.setText(product.getName());
-            //TODO to set image
-            image.setImageDrawable(getResources().getDrawable(R.drawable.tst));
+            new DownloadImageTask((ImageView) findViewById(R.id.product_image)).execute(product.getImage()); //TODO pictures should be loaded directly to product
             description.setText(Html.fromHtml(product.getText().replace("[", "<").replace("]", ">")));
             price.setText(product.getPrice() + " " + getString(R.string.currency));
         }
