@@ -2,14 +2,13 @@ package kg.gorillagym.gorillagymshop;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.PriorityQueue;
 
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
@@ -38,7 +37,7 @@ public class ProductDetails extends AppCompatActivity {
             name.setText(product.getName());
             //TODO to set image
             image.setImageDrawable(getResources().getDrawable(R.drawable.tst));
-            description.setText(product.getText());
+            description.setText(Html.fromHtml(product.getText().replace("[", "<").replace("]", ">")));
             price.setText(product.getPrice() + " " + getString(R.string.currency));
         }
 
