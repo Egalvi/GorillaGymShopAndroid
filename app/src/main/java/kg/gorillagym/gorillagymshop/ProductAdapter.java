@@ -45,7 +45,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             }
         });
         TextView price = (TextView) convertView.findViewById(R.id.product_price);
-        price.setText(String.valueOf(product.getPrice()));
+        price.setText(String.valueOf(product.getPrice()) + " " + activity.getString(R.string.currency));
         return convertView;
     }
 }
