@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Map;
 
+import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import ru.egalvi.shop.CartItem;
 import ru.egalvi.shop.gorillagym.model.Product;
@@ -37,10 +38,9 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
             convertView = inflater.inflate(R.layout.cart_list_item, parent, false);
         }
         Button text = (Button) convertView.findViewById(R.id.product_title);
-        ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
         final Product product = (Product) getItem(position); //TODO possibly unsafe cast
         text.setText(product.getName());
-        image.setImageDrawable(activity.getResources().getDrawable(R.drawable.tst));
+        new DownloadImageTask((ImageView) convertView.findViewById(R.id.product_image)).execute(product.getImage()); //TODO pictures should be loaded directly to product
 //        MyNumberField quantity = (MyNumberField) convertView.findViewById(R.id.cart_quantity);
         Integer itemQuantity = productsInCart.get(product);
 //        quantity.setValue(itemQuantity);
