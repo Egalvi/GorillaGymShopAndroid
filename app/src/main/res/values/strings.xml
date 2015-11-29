@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gorilla Gym Shop</string>
+    <string name="app_name">100 Pudov</string>
 
     <string name="title_activity_product_list">ProductList</string>
     <string name="title_activity_product_details">ProductDetails</string>
@@ -8,6 +8,7 @@
     <string name="button_checkout">Checkout</string>
     <string name="button_clear_cart">Clear cart</string>
     <string name="total_price">Total price</string>
+    <string name="cart_empty">Cart is empty</string>
 
     <!-- Product list-->
     <string name="currency">Som</string>

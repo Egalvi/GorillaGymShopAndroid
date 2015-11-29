@@ -17,8 +17,6 @@ import ru.egalvi.shop.CartItem;
 
 public class CartActivity extends AppCompatActivity {
 
-
-    //TODO check
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +36,7 @@ public class CartActivity extends AppCompatActivity {
             totalHolder.setVisibility(View.GONE);
             cartMessage.setVisibility(View.VISIBLE);
             cartMessage.setHeight(50);
-            cartMessage.setText("Cart is empty");//TODO i18n
+            cartMessage.setText(getString(R.string.cart_empty));
             lv.setAdapter(null);
         } else {
             checkoutButton.setVisibility(View.VISIBLE);

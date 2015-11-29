@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">100 Pudov</string>
+
+    <!-- TODO set proper names e.g. products for category, product name-->
+    <string name="title_activity_product_list">Список товаров</string>
+    <string name="title_activity_product_details">Страница товара</string>
+
+    <!-- Cart activity-->
+    <string name="button_checkout">Оформить заказ</string>
+    <string name="button_clear_cart">Очистить корзину</string>
+    <string name="total_price">Итого</string>
+    <string name="cart_empty">Корзина пуста</string>
+
+    <!-- Product list-->
+    <string name="currency">сом</string>
+
+    <!-- Menu constants -->
+    <string name="action_settings">Настройки</string>
+    <string name="menu_action_categories">К списку категорий</string>
+    <string name="menu_action_products">К списку товаров</string>
+    <string name="menu_action_cart">Корзина</string>
+    <string name="title_activity_cart">Корзина</string>
+
+    <string name="title_activity_contact_details">Данные для заказа</string>
+    <string name="title_activity_number_field">NumberField</string>
+</resources>
