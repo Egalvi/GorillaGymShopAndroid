@@ -1,17 +1,13 @@
 package kg.gorillagym.gorillagymshop.async;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
 
 import kg.gorillagym.gorillagymshop.CategoryAdapter;
-import kg.gorillagym.gorillagymshop.ProductList;
 import kg.gorillagym.gorillagymshop.R;
 import kg.gorillagym.shop.content.GorillaGymCategoryService;
 import ru.egalvi.shop.gorillagym.model.Category;
@@ -23,7 +19,7 @@ public class CategoryLoaderTask extends AsyncTask<Object, Void, Void> {
     ListView categoryListView;
 
     @Override
-    protected Void doInBackground(Object... params) {
+    protected Void doInBackground(Object... params) {//TODO can pass this parameters to constructor
         categoryActivity = (Activity) params[0];
         categoryListView = (ListView) params[1];
         CategoryService carrierService = new GorillaGymCategoryService();

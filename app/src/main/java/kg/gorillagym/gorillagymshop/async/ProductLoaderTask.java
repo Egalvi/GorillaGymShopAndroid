@@ -21,7 +21,7 @@ public class ProductLoaderTask extends AsyncTask<Object, Void, Void> {
     ListView productListView;
 
     @Override
-    protected Void doInBackground(Object... params) {
+    protected Void doInBackground(Object... params) {//TODO can pass this parameters to constructor
         productActivity = (Activity) params[0];
         productListView = (ListView) params[1];
         category = (Category) params[2];

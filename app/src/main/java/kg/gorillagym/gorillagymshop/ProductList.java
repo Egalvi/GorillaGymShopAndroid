@@ -23,8 +23,7 @@ public class ProductList extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             category = (Category) extras.getSerializable("CATEGORY");
-            AsyncTask<Object, Void, Void> productLoadTask = new ProductLoaderTask();
-            productLoadTask.execute(ProductList.this, lv, category);
+            new ProductLoaderTask().execute(ProductList.this, lv, category);
         }
     }
 

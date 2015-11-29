@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        AsyncTask<Object, Void, Void> categoryLoaderTask = new CategoryLoaderTask();
-        categoryLoaderTask.execute(MainActivity.this, lv);
+        new CategoryLoaderTask().execute(MainActivity.this, lv);
     }
 
     @Override
