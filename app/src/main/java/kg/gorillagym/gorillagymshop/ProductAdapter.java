@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
@@ -34,10 +35,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             convertView = inflater.inflate(R.layout.product_list_item, parent, false);
         }
         Button text = (Button) convertView.findViewById(R.id.product_title);
-        ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
         final Product product = getItem(position);
         text.setText(product.getName());
-        image.setImageDrawable(activity.getResources().getDrawable(R.drawable.tst));
+        new DownloadImageTask((ImageView) convertView.findViewById(R.id.product_image)).execute(product.getImage()); //TODO pictures should be loaded directly to product
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +45,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             }
         });
         TextView price = (TextView) convertView.findViewById(R.id.product_price);
-        price.setText(String.valueOf(product.getPrice()));
+        price.setText(String.valueOf(product.getPrice()) + " " + activity.getString(R.string.currency));
         return convertView;
     }
 }

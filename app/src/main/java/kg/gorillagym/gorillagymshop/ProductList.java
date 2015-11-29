@@ -1,19 +1,15 @@
 package kg.gorillagym.gorillagymshop;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.List;
-
+import kg.gorillagym.gorillagymshop.async.ProductLoaderTask;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
-import ru.egalvi.shop.gorillagym.model.Product;
-import ru.egalvi.shop.gorillagym.service.ProductService;
-import ru.egalvi.shop.service.impl.TestProductService;
 
 public class ProductList extends AppCompatActivity {
 
@@ -23,19 +19,11 @@ public class ProductList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_list);
-
         final ListView lv = (ListView) findViewById(R.id.productView);
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             category = (Category) extras.getSerializable("CATEGORY");
-            ProductService productService = new TestProductService();
-            List<Product> products = productService.getForCategory(category);
-            ArrayAdapter<Product> arrayAdapter = new ProductAdapter(this,
-                    R.layout.product_list_item,
-                    products, category);
-
-            lv.setAdapter(arrayAdapter);
+            new ProductLoaderTask().execute(ProductList.this, lv, category);
         }
     }
 
