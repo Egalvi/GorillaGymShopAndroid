@@ -1,18 +1,13 @@
 package kg.gorillagym.gorillagymshop.async;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
 
-import kg.gorillagym.gorillagymshop.CategoryAdapter;
 import kg.gorillagym.gorillagymshop.ProductAdapter;
-import kg.gorillagym.gorillagymshop.ProductList;
 import kg.gorillagym.gorillagymshop.R;
 import kg.gorillagym.shop.content.GorillaGymProductService;
 import ru.egalvi.shop.gorillagym.model.Category;

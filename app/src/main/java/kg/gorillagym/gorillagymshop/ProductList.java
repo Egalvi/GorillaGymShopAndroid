@@ -5,17 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.util.List;
 
 import kg.gorillagym.gorillagymshop.async.ProductLoaderTask;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
-import kg.gorillagym.shop.content.GorillaGymProductService;
 import ru.egalvi.shop.gorillagym.model.Category;
-import ru.egalvi.shop.gorillagym.model.Product;
-import ru.egalvi.shop.gorillagym.service.ProductService;
 
 public class ProductList extends AppCompatActivity {
 

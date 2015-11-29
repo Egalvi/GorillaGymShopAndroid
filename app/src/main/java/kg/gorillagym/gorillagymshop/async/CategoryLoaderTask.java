@@ -47,16 +47,5 @@ public class CategoryLoaderTask extends AsyncTask<Object, Void, Void> {
                 R.layout.category_list_item, categories);
 
         categoryListView.setAdapter(arrayAdapter);
-
-        categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Application app = getApplication();
-//                view.setBackgroundColor(android.R.color.background_light);
-//                app.setCurrentItem(app.getSectionList().get(currentSelectedSection).getItems().get(position));
-                Intent productList = new Intent(categoryActivity, ProductList.class);
-                categoryActivity.startActivity(productList);
-            }
-        });
     }
 }
