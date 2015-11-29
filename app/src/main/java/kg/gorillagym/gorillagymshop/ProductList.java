@@ -1,6 +1,5 @@
 package kg.gorillagym.gorillagymshop;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -23,7 +22,7 @@ public class ProductList extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             category = (Category) extras.getSerializable("CATEGORY");
-            new ProductLoaderTask().execute(ProductList.this, lv, category);
+            new ProductLoaderTask(category, ProductList.this, lv).execute();
         }
     }
 

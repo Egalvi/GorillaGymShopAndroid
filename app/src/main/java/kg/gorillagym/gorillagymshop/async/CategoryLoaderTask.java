@@ -13,15 +13,18 @@ import kg.gorillagym.shop.content.GorillaGymCategoryService;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.service.CategoryService;
 
-public class CategoryLoaderTask extends AsyncTask<Object, Void, Void> {
+public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
     List<Category> categories;
     Activity categoryActivity;
     ListView categoryListView;
 
+    public CategoryLoaderTask(Activity categoryActivity, ListView categoryListView) {
+        this.categoryActivity = categoryActivity;
+        this.categoryListView = categoryListView;
+    }
+
     @Override
-    protected Void doInBackground(Object... params) {//TODO can pass this parameters to constructor
-        categoryActivity = (Activity) params[0];
-        categoryListView = (ListView) params[1];
+    protected Void doInBackground(Void... params) {
         CategoryService carrierService = new GorillaGymCategoryService();
         try {
             categories = carrierService.getAll();

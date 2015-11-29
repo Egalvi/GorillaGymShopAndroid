@@ -1,6 +1,5 @@
 package kg.gorillagym.gorillagymshop;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        new CategoryLoaderTask().execute(MainActivity.this, lv);
+        new CategoryLoaderTask(MainActivity.this, lv).execute();
     }
 
     @Override

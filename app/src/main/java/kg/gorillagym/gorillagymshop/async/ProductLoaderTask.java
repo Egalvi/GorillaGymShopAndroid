@@ -14,17 +14,20 @@ import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 import ru.egalvi.shop.gorillagym.service.ProductService;
 
-public class ProductLoaderTask extends AsyncTask<Object, Void, Void> {
+public class ProductLoaderTask extends AsyncTask<Void, Void, Void> {
     List<Product> products;
     Category category;
     Activity productActivity;
     ListView productListView;
 
+    public ProductLoaderTask(Category category, Activity productActivity, ListView productListView) {
+        this.category = category;
+        this.productActivity = productActivity;
+        this.productListView = productListView;
+    }
+
     @Override
-    protected Void doInBackground(Object... params) {//TODO can pass this parameters to constructor
-        productActivity = (Activity) params[0];
-        productListView = (ListView) params[1];
-        category = (Category) params[2];
+    protected Void doInBackground(Void... params) {
         ProductService productService = new GorillaGymProductService();
         try {
             products = productService.getForCategory(category);
