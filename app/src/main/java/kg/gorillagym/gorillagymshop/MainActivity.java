@@ -1,7 +1,13 @@
 package kg.gorillagym.gorillagymshop;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,16 +15,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 import java.util.List;
 
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import kg.gorillagym.shop.content.GorillaGymCategoryService;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.service.CategoryService;
-import ru.egalvi.shop.service.impl.TestCategoryService;
+//import ru.egalvi.shop.service.impl.TestCategoryService;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    CursorAdapter categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView lv = (ListView) findViewById(R.id.listView);
 
-        CategoryService categoryService = new TestCategoryService();
+        CategoryService categoryService = new GorillaGymCategoryService();
 
         List<Category> categoryList = categoryService.getAll();
 
-        ArrayAdapter<Category> arrayAdapter = new CategoryAdapter(this,
-                R.layout.category_list_item,
-                categoryList);
+        categoryAdapter = new CategoryCursorAdapter(this, null, 0);
 
-        lv.setAdapter(arrayAdapter);
+        lv.setAdapter(categoryAdapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 Navigator.goToCart(MainActivity.this);
             }
         });
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
@@ -77,5 +87,22 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(this, ContactsContract.Data.CONTENT_URI,
+                PROJECTION, SELECTION, null, null);
+
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        categoryAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        categoryAdapter.swapCursor(null);
     }
 }

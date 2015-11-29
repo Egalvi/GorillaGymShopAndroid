@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -24,7 +28,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile 'ru.egalvi.shop:gorillagym-model:1.0-SNAPSHOT'
 
-    compile 'ru.egalvi.shop:test-service:1.0-SNAPSHOT'
+//    compile 'ru.egalvi.shop:test-service:1.0-SNAPSHOT'
+    compile 'ru.egalvi.shop:gorillagym-content-service:1.0-SNAPSHOT'
 
 
 }
