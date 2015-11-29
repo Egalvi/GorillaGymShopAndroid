@@ -22,6 +22,7 @@ public class ProductList extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             category = (Category) extras.getSerializable("CATEGORY");
+            setTitle(category.getName());
             new ProductLoaderTask(category, ProductList.this, lv).execute();
         }
     }

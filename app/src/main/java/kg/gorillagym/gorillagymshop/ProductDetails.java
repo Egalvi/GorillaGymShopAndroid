@@ -34,6 +34,7 @@ public class ProductDetails extends AppCompatActivity {
         if (extras != null) {
             product = (Product) extras.getSerializable("PRODUCT");
             category = (Category) extras.getSerializable("CATEGORY");
+            setTitle(product.getName());
             name.setText(product.getName());
             new DownloadImageTask((ImageView) findViewById(R.id.product_image)).execute(product.getImage()); //TODO pictures should be loaded directly to product
             description.setText(Html.fromHtml(product.getText().replace("[", "<").replace("]", ">")));
