@@ -14,9 +14,9 @@ import android.widget.ListView;
 import java.util.List;
 
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import kg.gorillagym.shop.content.GorillaGymCategoryService;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.service.CategoryService;
-import ru.egalvi.shop.service.impl.TestCategoryService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView lv = (ListView) findViewById(R.id.listView);
 
-        CategoryService categoryService = new TestCategoryService();
+        CategoryService categoryService = new GorillaGymCategoryService();
 
         List<Category> categoryList = categoryService.getAll();
 

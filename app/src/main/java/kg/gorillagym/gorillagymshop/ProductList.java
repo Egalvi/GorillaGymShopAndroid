@@ -10,10 +10,10 @@ import android.widget.ListView;
 import java.util.List;
 
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import kg.gorillagym.shop.content.GorillaGymProductService;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 import ru.egalvi.shop.gorillagym.service.ProductService;
-import ru.egalvi.shop.service.impl.TestProductService;
 
 public class ProductList extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class ProductList extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             category = (Category) extras.getSerializable("CATEGORY");
-            ProductService productService = new TestProductService();
+            ProductService productService = new GorillaGymProductService();
             List<Product> products = productService.getForCategory(category);
             ArrayAdapter<Product> arrayAdapter = new ProductAdapter(this,
                     R.layout.product_list_item,

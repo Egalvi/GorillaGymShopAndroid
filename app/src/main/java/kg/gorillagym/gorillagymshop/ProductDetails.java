@@ -38,7 +38,7 @@ public class ProductDetails extends AppCompatActivity {
             name.setText(product.getName());
             //TODO to set image
             image.setImageDrawable(getResources().getDrawable(R.drawable.tst));
-            description.setText(product.getDescription());
+            description.setText(product.getText());
             price.setText(product.getPrice() + " " + getString(R.string.currency));
         }
 
