@@ -1,5 +1,7 @@
 package kg.gorillagym.gorillagymshop;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,7 +38,6 @@ public class ContactDetails extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 cartService.checkout(CartHolder.getCart(), new ClientData() {
                 });
             }
@@ -45,10 +46,26 @@ public class ContactDetails extends AppCompatActivity {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                emailField.setText("");
-                nameField.setText("");
-                addressField.setText("");
-                phoneField.setText("");
+                new AlertDialog.Builder(ContactDetails.this)
+                        .setTitle(getString(R.string.clear_contact_data))
+                        .setMessage(getString(R.string.really_clear_contact_data))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                CartHolder.getCart().clear();
+                                emailField.setText("");
+                                nameField.setText("");
+                                addressField.setText("");
+                                phoneField.setText("");
+                            }
+                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
             }
         });
     }
