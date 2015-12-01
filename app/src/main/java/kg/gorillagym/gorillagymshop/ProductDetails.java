@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
@@ -48,6 +49,10 @@ public class ProductDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CartHolder.getCart().add(product, 1);
+                String text = String.format(getString(R.string.added_to_cart), product.getName());
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(ProductDetails.this, text, duration);
+                toast.show();
             }
         });
     }
