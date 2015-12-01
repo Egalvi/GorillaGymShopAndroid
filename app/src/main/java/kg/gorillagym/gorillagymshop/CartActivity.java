@@ -1,7 +1,9 @@
 package kg.gorillagym.gorillagymshop;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,8 +60,23 @@ public class CartActivity extends AppCompatActivity {
             clearCartButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CartHolder.getCart().clear();
-                    updateCartView();
+                    new AlertDialog.Builder(CartActivity.this)
+                            .setTitle(getString(R.string.clear_cart))
+                            .setMessage(getString(R.string.really_clear_cart))
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    CartHolder.getCart().clear();
+                                    updateCartView();
+                                }
+                            }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
                 }
             });
         }

@@ -55,9 +55,7 @@ public class ProductLoaderTask extends AsyncTask<Void, Void, Void> {
                     .setTitle(productActivity.getString(R.string.no_products))
                     .setMessage(productActivity.getString(R.string.no_products_for_category))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // continue with delete
-                        }
+                        public void onClick(DialogInterface dialog, int which) { }
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();

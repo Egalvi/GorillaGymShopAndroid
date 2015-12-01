@@ -26,4 +26,6 @@
     <string name="cart">Корзина</string>
     <string name="no_products">Нет товаров</string>
     <string name="no_products_for_category">В выбранной категории нет товаров</string>
+    <string name="clear_cart">Очистить заказ</string>
+    <string name="really_clear_cart">Вы действительно хотите удалить все товары из заказа?</string>
 </resources>
