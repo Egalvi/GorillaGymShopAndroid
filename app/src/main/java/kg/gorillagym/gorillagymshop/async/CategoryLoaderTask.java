@@ -2,6 +2,7 @@ package kg.gorillagym.gorillagymshop.async;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -37,14 +38,15 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        categoryActivity.findViewById(R.id.loadingIndicator).setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        categoryActivity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
         ArrayAdapter<Category> arrayAdapter = new CategoryAdapter(categoryActivity,
                 R.layout.category_list_item, categories);
-
         categoryListView.setAdapter(arrayAdapter);
     }
 }

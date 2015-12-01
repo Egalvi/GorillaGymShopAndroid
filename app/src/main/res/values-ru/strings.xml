@@ -23,4 +23,5 @@
     <string name="title_activity_contact_details">Данные для заказа</string>
     <string name="title_activity_number_field">NumberField</string>
     <string name="added_to_cart">Товар %s был добавлен в корзину</string>
+    <string name="cart">Корзина</string>
 </resources>

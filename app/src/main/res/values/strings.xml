@@ -24,4 +24,5 @@
     <string name="title_activity_contact_details">ContactDetails</string>
     <string name="title_activity_number_field">NumberField</string>
     <string name="added_to_cart">Product %s was added to cart</string>
+    <string name="cart">Cart</string>
 </resources>
