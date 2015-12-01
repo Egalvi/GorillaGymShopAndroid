@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import kg.gorillagym.gorillagymshop.async.ProductLoaderTask;
@@ -25,6 +27,13 @@ public class ProductList extends AppCompatActivity {
             setTitle(category.getName());
             new ProductLoaderTask(category, ProductList.this, lv).execute();
         }
+        Button cartButton = (Button) findViewById(R.id.cartButton);
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigator.goToCart(ProductList.this);
+            }
+        });
     }
 
     @Override

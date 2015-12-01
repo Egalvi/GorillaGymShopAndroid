@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        final ListView lv = (ListView) findViewById(R.id.listView);
-
         Button cartButton = (Button) findViewById(R.id.cartButton);
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 Navigator.goToCart(MainActivity.this);
             }
         });
-
+        final ListView lv = (ListView) findViewById(R.id.listView);
         new CategoryLoaderTask(MainActivity.this, lv).execute();
     }
 
