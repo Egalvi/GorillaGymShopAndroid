@@ -31,4 +31,6 @@
     <string name="really_clear_cart">Вы действительно хотите удалить все товары из заказа?</string>
     <string name="clear_contact_data">Стереть данные</string>
     <string name="really_clear_contact_data">Вы действительно хотите стереть введенные данные?</string>
+    <string name="save_contact_data">Сохранить контакты</string>
+    <string name="really_save_contact_data">Сохранить введенные контактные данные? Если вы ранее уже сохраняли контактные данные, они будут перезаписаны</string>
 </resources>
