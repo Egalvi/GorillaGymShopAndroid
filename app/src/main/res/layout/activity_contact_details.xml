@@ -18,9 +18,9 @@
 
         <EditText
             android:id="@+id/edit_email"
-            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress" />
     </TableRow>
 
     <TableRow>
@@ -32,9 +32,9 @@
 
         <EditText
             android:id="@+id/edit_name"
-            android:inputType="textPersonName"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:inputType="textPersonName" />
     </TableRow>
 
     <TableRow>
@@ -46,9 +46,9 @@
 
         <EditText
             android:id="@+id/edit_phone"
-            android:inputType="phone"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:inputType="phone" />
     </TableRow>
 
     <TableRow>
@@ -60,12 +60,18 @@
 
         <EditText
             android:id="@+id/edit_address"
-            android:inputType="textPostalAddress"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:inputType="textPostalAddress" />
     </TableRow>
 
     <TableRow>
+
+        <Button
+            android:id="@+id/button_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Очистить" />
 
         <Button
             android:id="@+id/button_send"
@@ -73,11 +79,6 @@
             android:layout_height="wrap_content"
             android:text="Отправить" />
 
-        <Button
-            android:id="@+id/button_clear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Очистить" />
     </TableRow>
 
 </TableLayout>
