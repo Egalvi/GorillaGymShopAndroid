@@ -2,12 +2,13 @@ package kg.gorillagym.gorillagymshop;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,6 +29,19 @@ public class ContactDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_details);
+        emptyFieldDialog = new AlertDialog.Builder(ContactDetails.this)
+                .setTitle(getString(R.string.field_empty))
+                .setMessage(getString(R.string.please_fill_the_field))
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert);
         final CartService cartService = new CartService() {
             @Override
             public void checkout(Cart cart, ClientData clientData) {
@@ -41,10 +55,14 @@ public class ContactDetails extends AppCompatActivity {
         final EditText phoneField = (EditText) findViewById(R.id.edit_phone);
 
         SharedPreferences preferences = getPreferences(0);
-        emailField.setText(preferences.getString(EMAIL_FIELD, ""));
-        nameField.setText(preferences.getString(NAME_FIELD, ""));
-        addressField.setText(preferences.getString(ADDRESS_FIELD, ""));
-        phoneField.setText(preferences.getString(PHONE_FIELD, ""));
+        final String savedEmail = preferences.getString(EMAIL_FIELD, "");
+        emailField.setText(savedEmail);
+        final String savedName = preferences.getString(NAME_FIELD, "");
+        nameField.setText(savedName);
+        final String savedAddress = preferences.getString(ADDRESS_FIELD, "");
+        addressField.setText(savedAddress);
+        final String savedPhone = preferences.getString(PHONE_FIELD, "");
+        phoneField.setText(savedPhone);
 
         Button sendButton = (Button) findViewById(R.id.button_send);
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -54,29 +72,51 @@ public class ContactDetails extends AppCompatActivity {
                 final String name = nameField.getText().toString();
                 final String address = addressField.getText().toString();
                 final String phone = phoneField.getText().toString();
-                //TODO check fields are not empty
-                //TODO check fields are not equal to previously saved
-                new AlertDialog.Builder(ContactDetails.this)
-                        .setTitle(getString(R.string.save_contact_data))
-                        .setMessage(getString(R.string.really_save_contact_data))
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences preferences = getPreferences(0);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString(EMAIL_FIELD, email);
-                                editor.putString(NAME_FIELD, name);
-                                editor.putString(ADDRESS_FIELD, address);
-                                editor.putString(PHONE_FIELD, phone);
-                                editor.apply();
-                            }
-                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        return;
-                    }
-                })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                //Validate for empty fields
+                if (email.trim().isEmpty()) {
+                    emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "email")).show();
+                    emailField.requestFocus();
+                    return;
+                }
+                if (name.trim().isEmpty()) {
+                    emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "имя")).show();
+                    nameField.requestFocus();
+                    return;
+                }
+                if (address.trim().isEmpty()) {
+                    emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "адрес")).show();
+                    addressField.requestFocus();
+                    return;
+                }
+                if (phone.trim().isEmpty()) {
+                    emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "телефон")).show();
+                    phoneField.requestFocus();
+                    return;
+                }
+                //Check that fields are not equal to previously saved
+                if (!savedEmail.equals(email) || !savedName.equals(name) || !savedAddress.equals(address) || !savedPhone.equals(phone)) {
+                    new AlertDialog.Builder(ContactDetails.this)
+                            .setTitle(getString(R.string.save_contact_data))
+                            .setMessage(getString(R.string.really_save_contact_data))
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    SharedPreferences preferences = getPreferences(0);
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString(EMAIL_FIELD, email);
+                                    editor.putString(NAME_FIELD, name);
+                                    editor.putString(ADDRESS_FIELD, address);
+                                    editor.putString(PHONE_FIELD, phone);
+                                    editor.apply();
+                                }
+                            }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
                 cartService.checkout(CartHolder.getCart(), new ClientData() {
                 });
             }
@@ -130,4 +170,6 @@ public class ContactDetails extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    AlertDialog.Builder emptyFieldDialog;
 }
