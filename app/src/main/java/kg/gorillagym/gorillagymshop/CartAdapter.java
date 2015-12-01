@@ -17,6 +17,7 @@ import java.util.Map;
 
 import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
+import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.CartItem;
 import ru.egalvi.shop.gorillagym.model.Product;
 
@@ -41,6 +42,12 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
         Button text = (Button) convertView.findViewById(R.id.product_title);
         final Product product = (Product) getItem(position); //TODO possibly unsafe cast
         text.setText(product.getName());
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigator.goToProductDetails(activity, null, product);
+            }
+        });
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
         image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
 //        MyNumberField quantity = (MyNumberField) convertView.findViewById(R.id.cart_quantity);

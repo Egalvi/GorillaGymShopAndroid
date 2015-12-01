@@ -19,6 +19,7 @@ import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 
 public class ProductDetails extends AppCompatActivity {
+    private Menu menu;
 
     private Category category;
     private Product product;
@@ -61,6 +62,10 @@ public class ProductDetails extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_product_details, menu);
+        this.menu = menu;
+        if (category == null) {
+            menu.removeItem(R.id.action_products);
+        }
         return true;
     }
 
