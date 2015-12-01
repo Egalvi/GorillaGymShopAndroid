@@ -73,10 +73,15 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
             public void onClick(View v) {
                 Integer quantity = Integer.valueOf(value.getText().toString());
                 value.getText().clear();
-                value.getText().append(String.valueOf(quantity - 1));
+                int newQuantity = quantity - 1;
+                value.getText().append(String.valueOf(newQuantity));
                 CartHolder.getCart().remove(product, 1);
-                ((CartActivity) activity).updateTotalPrice();
-                price.setText(String.valueOf(product.getPrice() * productsInCart.get(product)) + " " + activity.getString(R.string.currency));
+                if (newQuantity > 0) {
+                    ((CartActivity) activity).updateTotalPrice();
+                    price.setText(String.valueOf(product.getPrice() * productsInCart.get(product)) + " " + activity.getString(R.string.currency));
+                } else {
+                    ((CartActivity) activity).updateCartView();
+                }
             }
         });
 

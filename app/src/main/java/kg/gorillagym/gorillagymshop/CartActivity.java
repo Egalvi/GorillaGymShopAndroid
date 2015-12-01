@@ -24,7 +24,7 @@ public class CartActivity extends AppCompatActivity {
         updateCartView();
     }
 
-    private void updateCartView() {
+    public void updateCartView() {
         TextView cartMessage = (TextView) findViewById(R.id.cartMessage);
         Button checkoutButton = (Button) findViewById(R.id.checkout_button);
         Button clearCartButton = (Button) findViewById(R.id.clear_cart_button);
