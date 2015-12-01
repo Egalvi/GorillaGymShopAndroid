@@ -25,4 +25,6 @@
     <string name="title_activity_number_field">NumberField</string>
     <string name="added_to_cart">Product %s was added to cart</string>
     <string name="cart">Cart</string>
+    <string name="no_products">No products</string>
+    <string name="no_products_for_category">There is no products for the selected category</string>
 </resources>

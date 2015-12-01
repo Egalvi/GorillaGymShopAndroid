@@ -24,4 +24,6 @@
     <string name="title_activity_number_field">NumberField</string>
     <string name="added_to_cart">Товар %s был добавлен в корзину</string>
     <string name="cart">Корзина</string>
+    <string name="no_products">Нет товаров</string>
+    <string name="no_products_for_category">В выбранной категории нет товаров</string>
 </resources>

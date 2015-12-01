@@ -1,7 +1,9 @@
 package kg.gorillagym.gorillagymshop.async;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -48,18 +50,21 @@ public class ProductLoaderTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         productActivity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
-        ArrayAdapter<Product> arrayAdapter = new ProductAdapter(productActivity,
-                R.layout.product_list_item, products, category);
-        productListView.setAdapter(arrayAdapter);
-//        productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                Application app = getApplication();
-////                view.setBackgroundColor(android.R.color.background_light);
-////                app.setCurrentItem(app.getSectionList().get(currentSelectedSection).getItems().get(position));
-//                Intent productList = new Intent(productActivity, ProductList.class);
-//                productActivity.startActivity(productList);
-//            }
-//        });
+        if (products == null || products.isEmpty()) {
+            new AlertDialog.Builder(productActivity)
+                    .setTitle(productActivity.getString(R.string.no_products))
+                    .setMessage(productActivity.getString(R.string.no_products_for_category))
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        } else {
+            ArrayAdapter<Product> arrayAdapter = new ProductAdapter(productActivity,
+                    R.layout.product_list_item, products, category);
+            productListView.setAdapter(arrayAdapter);
+        }
     }
 }
