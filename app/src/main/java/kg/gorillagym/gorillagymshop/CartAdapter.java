@@ -2,6 +2,7 @@ package kg.gorillagym.gorillagymshop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,8 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
         Button text = (Button) convertView.findViewById(R.id.product_title);
         final Product product = (Product) getItem(position); //TODO possibly unsafe cast
         text.setText(product.getName());
-        new DownloadImageTask((ImageView) convertView.findViewById(R.id.product_image)).execute(product.getImage()); //TODO pictures should be loaded directly to product
+        ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
+        image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
 //        MyNumberField quantity = (MyNumberField) convertView.findViewById(R.id.cart_quantity);
         Integer itemQuantity = productsInCart.get(product);
 //        quantity.setValue(itemQuantity);

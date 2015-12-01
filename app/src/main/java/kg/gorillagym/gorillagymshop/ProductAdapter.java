@@ -2,6 +2,7 @@ package kg.gorillagym.gorillagymshop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         Button text = (Button) convertView.findViewById(R.id.product_title);
         final Product product = getItem(position);
         text.setText(product.getName());
-        new DownloadImageTask((ImageView) convertView.findViewById(R.id.product_image)).execute(product.getImage()); //TODO pictures should be loaded directly to product
+        ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
+        image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

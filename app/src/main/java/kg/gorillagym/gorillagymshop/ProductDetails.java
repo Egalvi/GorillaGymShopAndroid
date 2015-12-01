@@ -1,5 +1,6 @@
 package kg.gorillagym.gorillagymshop;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -36,7 +37,8 @@ public class ProductDetails extends AppCompatActivity {
             category = (Category) extras.getSerializable("CATEGORY");
             setTitle(product.getName());
             name.setText(product.getName());
-            new DownloadImageTask((ImageView) findViewById(R.id.product_image)).execute(product.getImage()); //TODO pictures should be loaded directly to product
+            ImageView image = (ImageView) findViewById(R.id.product_image);
+            image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
             description.setText(Html.fromHtml(product.getText().replace("[", "<").replace("]", ">")));
             price.setText(product.getPrice() + " " + getString(R.string.currency));
         }
