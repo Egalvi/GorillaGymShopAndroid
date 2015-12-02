@@ -9,6 +9,7 @@ import com.vincentbrison.openlibraries.android.dualcache.lib.SizeOf;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,17 +69,34 @@ public class CacheImpl implements Cache {
 
     public static class ProductCacheHolder implements Serializable {
         private Map<Category, List<Product>> categoryToProductsMap = new HashMap<>();
+        private Date creationDate;
+
+        private static final long INVALIDATE_OFFSET = 24 * 60 * 60 * 1000; //24 hours in milliseconds
+
+        public ProductCacheHolder() {
+            this.creationDate = new Date();
+        }
 
         public void add(Category category, List<Product> products) {
+            invalidateCache();
             categoryToProductsMap.put(category, products);
         }
 
         public List<Product> get(Category category) {
+            invalidateCache();
             return categoryToProductsMap.get(category);
         }
 
         public Set<Category> getCategories() {
+            invalidateCache();
             return categoryToProductsMap.keySet();
+        }
+
+        private void invalidateCache() {
+            if (new Date().getTime() - creationDate.getTime() > INVALIDATE_OFFSET) {
+                categoryToProductsMap.clear();
+                creationDate = new Date();
+            }
         }
     }
 
