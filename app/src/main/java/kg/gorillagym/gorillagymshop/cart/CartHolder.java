@@ -4,9 +4,13 @@ import ru.egalvi.shop.Cart;
 import ru.egalvi.shop.impl.CartImpl;
 
 public class CartHolder {
-    private static final Cart cart = new CartImpl();
+    private static Cart cart = new CartImpl();
 
-    public static Cart getCart(){
+    public static void init(Cart cart) {
+        CartHolder.cart = cart == null ? CartHolder.cart : cart;
+    }
+
+    public static Cart getCart() {
         return cart;
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
+import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
@@ -54,6 +55,7 @@ public class ProductDetails extends AppCompatActivity {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(ProductDetails.this, text, duration);
                 toast.show();
+                CacheHolder.getCache().putCart(MainActivity.CART_CACHE_NAME, CartHolder.getCart());
             }
         });
     }

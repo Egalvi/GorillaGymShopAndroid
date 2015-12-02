@@ -9,13 +9,19 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import kg.gorillagym.gorillagymshop.async.CategoryLoaderTask;
+import kg.gorillagym.gorillagymshop.cache.CacheHolder;
+import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String CART_CACHE_NAME = "cart";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CacheHolder.init(getApplicationContext());
+        CartHolder.init(CacheHolder.getCache().getCart(CART_CACHE_NAME));
         setContentView(R.layout.activity_main);
         Button cartButton = (Button) findViewById(R.id.cartButton);
         cartButton.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +54,11 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        CacheHolder.getCache().putCart(CART_CACHE_NAME, CartHolder.getCart());
     }
 }

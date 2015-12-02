@@ -50,6 +50,8 @@ dependencies {
 
 //    compile 'ru.egalvi.shop:test-service:1.0-SNAPSHOT'
     compile 'ru.egalvi.shop:gorillagym-content-service:1.0-SNAPSHOT'
-
+    compile ('com.vincentbrison.openlibraries.android:dualcache:2.2.2@jar') {
+        transitive = true
+    }
 
 }
