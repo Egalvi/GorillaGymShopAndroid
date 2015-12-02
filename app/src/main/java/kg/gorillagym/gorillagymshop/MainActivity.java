@@ -1,6 +1,11 @@
 package kg.gorillagym.gorillagymshop;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,15 +29,29 @@ public class MainActivity extends AppCompatActivity {
         CacheHolder.init(getApplicationContext());
         CartHolder.init(CacheHolder.getCache().getCart(CART_CACHE_NAME));
         setContentView(R.layout.activity_main);
-        Button cartButton = (Button) findViewById(R.id.cartButton);
-        cartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigator.goToCart(MainActivity.this);
-            }
-        });
-        final ListView lv = (ListView) findViewById(R.id.listView);
-        new CategoryLoaderTask(MainActivity.this, lv).execute();
+        if (!isOnline()) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle(getString(R.string.no_internet_access_title))
+                    .setMessage(getString(R.string.no_internet_access_message))
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            System.exit(0);
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+        } else {
+            Button cartButton = (Button) findViewById(R.id.cartButton);
+            cartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigator.goToCart(MainActivity.this);
+                }
+            });
+            final ListView lv = (ListView) findViewById(R.id.listView);
+            new CategoryLoaderTask(MainActivity.this, lv).execute();
+        }
     }
 
     @Override
@@ -55,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     @Override
