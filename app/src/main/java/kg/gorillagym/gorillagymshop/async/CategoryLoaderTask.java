@@ -34,13 +34,13 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
         CacheImpl.ProductCacheHolder products = CacheHolder.getCache().getProducts(MainActivity.PRODUCTS_CACHE_NAME);
         if (products != null && !products.getCategories().isEmpty()) {
             categories = products.getCategories();
-            return null;
-        }
-        CategoryService carrierService = new GorillaGymCategoryService();
-        try {
-            categories = carrierService.getAll();
-        } catch (Exception e) {
-            //TODO java.net.UnknownHostException: Unable to resolve host if internet is OFF
+        } else {
+            CategoryService carrierService = new GorillaGymCategoryService();
+            try {
+                categories = carrierService.getAll();
+            } catch (Exception e) {
+                //TODO java.net.UnknownHostException: Unable to resolve host if internet is OFF
+            }
         }
         return null;
     }
@@ -54,14 +54,14 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        CacheImpl.ProductCacheHolder products = CacheHolder.getCache().getProducts(MainActivity.PRODUCTS_CACHE_NAME);
-        products = products == null ? new CacheImpl.ProductCacheHolder() : products;
+        CacheImpl.ProductCacheHolder productsCache = CacheHolder.getCache().getProducts(MainActivity.PRODUCTS_CACHE_NAME);
+        productsCache = productsCache == null ? new CacheImpl.ProductCacheHolder() : productsCache;
         for (Category category : categories) {
-            if (!products.getCategories().contains(category)) {
-                products.add(category, null);
+            if (!productsCache.getCategories().contains(category)) {
+                productsCache.add(category, null);
             }
         }
-        CacheHolder.getCache().putProducts(MainActivity.PRODUCTS_CACHE_NAME, products);
+        CacheHolder.getCache().putProducts(MainActivity.PRODUCTS_CACHE_NAME, productsCache);
         categoryActivity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
         ArrayAdapter<Category> arrayAdapter = new CategoryAdapter(categoryActivity,
                 R.layout.category_list_item, new ArrayList<>(categories));
