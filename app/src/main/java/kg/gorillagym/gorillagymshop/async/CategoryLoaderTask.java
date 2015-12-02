@@ -6,16 +6,21 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import kg.gorillagym.gorillagymshop.CategoryAdapter;
+import kg.gorillagym.gorillagymshop.MainActivity;
 import kg.gorillagym.gorillagymshop.R;
+import kg.gorillagym.gorillagymshop.cache.CacheHolder;
+import kg.gorillagym.gorillagymshop.cache.impl.CacheImpl;
 import kg.gorillagym.shop.content.GorillaGymCategoryService;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.service.CategoryService;
 
 public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
-    List<Category> categories;
+    Collection<Category> categories;
     Activity categoryActivity;
     ListView categoryListView;
 
@@ -26,6 +31,11 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
+        CacheImpl.ProductCacheHolder products = CacheHolder.getCache().getProducts(MainActivity.PRODUCTS_CACHE_NAME);
+        if (products != null && !products.getCategories().isEmpty()) {
+            categories = products.getCategories();
+            return null;
+        }
         CategoryService carrierService = new GorillaGymCategoryService();
         try {
             categories = carrierService.getAll();
@@ -44,9 +54,17 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        CacheImpl.ProductCacheHolder products = CacheHolder.getCache().getProducts(MainActivity.PRODUCTS_CACHE_NAME);
+        products = products == null ? new CacheImpl.ProductCacheHolder() : products;
+        for (Category category : categories) {
+            if (!products.getCategories().contains(category)) {
+                products.add(category, null);
+            }
+        }
+        CacheHolder.getCache().putProducts(MainActivity.PRODUCTS_CACHE_NAME, products);
         categoryActivity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
         ArrayAdapter<Category> arrayAdapter = new CategoryAdapter(categoryActivity,
-                R.layout.category_list_item, categories);
+                R.layout.category_list_item, new ArrayList<>(categories));
         categoryListView.setAdapter(arrayAdapter);
     }
 }

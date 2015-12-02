@@ -8,9 +8,11 @@ import com.vincentbrison.openlibraries.android.dualcache.lib.DualCacheContextUti
 import com.vincentbrison.openlibraries.android.dualcache.lib.SizeOf;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import kg.gorillagym.gorillagymshop.cache.Cache;
 import ru.egalvi.shop.Cart;
@@ -34,13 +36,13 @@ public class CacheImpl implements Cache {
         DualCacheContextUtils.setContext(context);
         productCache =
                 new DualCacheBuilder<>(PRODUCT_CACHE_NAME, APP_VERSION, ProductCacheHolder.class)
-//                        .useReferenceInRam(RAM_MAX_SIZE, new SizeOfProductCacheHolder())
-                        .noRam()
+                        .useReferenceInRam(RAM_MAX_SIZE, new SizeOfProductCacheHolder())
+//                        .noRam()
                         .useDefaultSerializerInDisk(DISK_MAX_SIZE, true);
         cartCache =
                 new DualCacheBuilder<>(CART_CACHE_NAME, APP_VERSION, Cart.class)
-//                        .useReferenceInRam(RAM_MAX_SIZE, new SizeOfCart())
-                        .noRam()
+                        .useReferenceInRam(RAM_MAX_SIZE, new SizeOfCart())
+//                        .noRam()
                         .useDefaultSerializerInDisk(DISK_MAX_SIZE, true);
     }
 
@@ -64,7 +66,7 @@ public class CacheImpl implements Cache {
         return cartCache.get(key);
     }
 
-    public static class ProductCacheHolder {
+    public static class ProductCacheHolder implements Serializable {
         private Map<Category, List<Product>> categoryToProductsMap = new HashMap<>();
 
         public void add(Category category, List<Product> products) {
@@ -73,6 +75,10 @@ public class CacheImpl implements Cache {
 
         public List<Product> get(Category category) {
             return categoryToProductsMap.get(category);
+        }
+
+        public Set<Category> getCategories() {
+            return categoryToProductsMap.keySet();
         }
     }
 

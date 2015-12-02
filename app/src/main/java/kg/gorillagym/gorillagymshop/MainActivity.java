@@ -16,6 +16,7 @@ import kg.gorillagym.gorillagymshop.navigation.Navigator;
 public class MainActivity extends AppCompatActivity {
 
     public static final String CART_CACHE_NAME = "cart";
+    public static final String PRODUCTS_CACHE_NAME = "products";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
