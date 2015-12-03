@@ -82,10 +82,4 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        CacheHolder.getCache().putCart(CART_CACHE_NAME, CartHolder.getCart());
-    }
 }
