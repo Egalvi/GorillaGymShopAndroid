@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import org.kefirsf.bb.BBProcessorFactory;
 import org.kefirsf.bb.TextProcessor;
 
 import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
+import kg.gorillagym.gorillagymshop.async.URLImageParser;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
@@ -43,11 +45,13 @@ public class ProductDetails extends AppCompatActivity {
         if (extras != null) {
             product = (Product) extras.getSerializable("PRODUCT");
             category = (Category) extras.getSerializable("CATEGORY");
+            URLImageParser imageGetter = new URLImageParser(description, this);
+            Spanned spanned = Html.fromHtml(processor.process(product.getText()).replaceAll("\\[center\\]", "").replaceAll("\\[/center\\]", ""), imageGetter, null);
             setTitle(product.getName());
             name.setText(product.getName());
             ImageView image = (ImageView) findViewById(R.id.product_image);
             image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
-            description.setText(Html.fromHtml(processor.process(product.getText()).replaceAll("\\[center\\]", "").replaceAll("\\[/center\\]", "")));
+            description.setText(spanned);
             price.setText(product.getPrice() + " " + getString(R.string.currency));
         }
 
