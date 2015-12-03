@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.kefirsf.bb.BBProcessorFactory;
+import org.kefirsf.bb.TextProcessor;
+
 import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
@@ -24,6 +27,8 @@ public class ProductDetails extends AppCompatActivity {
 
     private Category category;
     private Product product;
+
+    private static TextProcessor processor = BBProcessorFactory.getInstance().create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class ProductDetails extends AppCompatActivity {
             name.setText(product.getName());
             ImageView image = (ImageView) findViewById(R.id.product_image);
             image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
-            description.setText(Html.fromHtml(product.getText().replace("[", "<").replace("]", ">")));
+            description.setText(Html.fromHtml(processor.process(product.getText()).replaceAll("\\[center\\]", "").replaceAll("\\[/center\\]", "")));
             price.setText(product.getPrice() + " " + getString(R.string.currency));
         }
 
