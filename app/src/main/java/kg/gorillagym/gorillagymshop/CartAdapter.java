@@ -42,13 +42,15 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
         Button text = (Button) convertView.findViewById(R.id.product_title);
         final Product product = (Product) getItem(position); //TODO possibly unsafe cast
         text.setText(product.getName());
-        text.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener goToProductDetailsClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigator.goToProductDetails(activity, null, product);
             }
-        });
+        };
+        text.setOnClickListener(goToProductDetailsClickListener);
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
+        image.setOnClickListener(goToProductDetailsClickListener);
         image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
 //        MyNumberField quantity = (MyNumberField) convertView.findViewById(R.id.cart_quantity);
         Integer itemQuantity = productsInCart.get(product);

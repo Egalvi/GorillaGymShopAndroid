@@ -40,12 +40,14 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         text.setText(product.getName());
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
         image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
-        text.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener goToDetailsClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigator.goToProductDetails(activity, category, product);
             }
-        });
+        };
+        text.setOnClickListener(goToDetailsClickListener);
+        image.setOnClickListener(goToDetailsClickListener);
         TextView price = (TextView) convertView.findViewById(R.id.product_price);
         price.setText(String.valueOf(product.getPrice()) + " " + activity.getString(R.string.currency));
         return convertView;

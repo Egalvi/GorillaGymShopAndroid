@@ -30,12 +30,13 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         Button text = (Button) convertView.findViewById(R.id.category_title);
         final Category category = getItem(position);
         text.setText(category.getName());
-        text.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener goToProductListClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigator.goToProducts(activity, category);
             }
-        });
+        };
+        text.setOnClickListener(goToProductListClickListener);
         return convertView;
     }
 }
