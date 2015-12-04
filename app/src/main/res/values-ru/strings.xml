@@ -7,7 +7,7 @@
     <!-- Cart activity-->
     <string name="button_checkout">Оформить заказ</string>
     <string name="button_clear_cart">Очистить корзину</string>
-    <string name="total_price">Итого</string>
+    <string name="total_price">Итого: </string>
     <string name="cart_empty">Корзина пуста</string>
 
     <!-- Product list-->
