@@ -1,6 +1,7 @@
 package kg.gorillagym.gorillagymshop;
 
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -40,6 +41,7 @@ public class ProductDetails extends AppCompatActivity {
         final TextView name = (TextView) findViewById(R.id.product_name);
         final TextView description = (TextView) findViewById(R.id.product_description);
         final TextView price = (TextView) findViewById(R.id.product_price);
+        final TextView oldPrice = (TextView) findViewById(R.id.product_old_price);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -53,6 +55,11 @@ public class ProductDetails extends AppCompatActivity {
             image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
             description.setText(spanned);
             price.setText(product.getPrice() + " " + getString(R.string.currency));
+            if (product.getOldprice() > 0) {
+                oldPrice.setVisibility(View.VISIBLE);
+                oldPrice.setPaintFlags(oldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                oldPrice.setText(product.getOldprice() + " " + getString(R.string.currency));
+            }
         }
 
         Button addToCart = (Button) findViewById(R.id.add_to_cart);
