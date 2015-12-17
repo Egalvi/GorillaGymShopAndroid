@@ -35,19 +35,11 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.product_list_item, parent, false);
         }
-        Button text = (Button) convertView.findViewById(R.id.product_title);
+        TextView text = (TextView) convertView.findViewById(R.id.product_title);
         final Product product = getItem(position);
         text.setText(product.getName());
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
         image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
-        View.OnClickListener goToDetailsClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigator.goToProductDetails(activity, category, product);
-            }
-        };
-        text.setOnClickListener(goToDetailsClickListener);
-        image.setOnClickListener(goToDetailsClickListener);
         TextView price = (TextView) convertView.findViewById(R.id.product_price);
         price.setText(String.valueOf(product.getPrice()) + " " + activity.getString(R.string.currency));
         return convertView;

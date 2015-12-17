@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import kg.gorillagym.gorillagymshop.async.ProductLoaderTask;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
+import ru.egalvi.shop.gorillagym.model.Product;
 
 public class ProductList extends AppCompatActivity {
 
@@ -26,6 +28,13 @@ public class ProductList extends AppCompatActivity {
             category = (Category) extras.getSerializable("CATEGORY");
             setTitle(category.getName());
             new ProductLoaderTask(category, ProductList.this, lv).execute();
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Product itemAtPosition = (Product) parent.getItemAtPosition(position);
+                    Navigator.goToProductDetails(ProductList.this, category, itemAtPosition);
+                }
+            });
         }
         Button cartButton = (Button) findViewById(R.id.cartButton);
         cartButton.setOnClickListener(new View.OnClickListener() {

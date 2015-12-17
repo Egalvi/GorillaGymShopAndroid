@@ -17,7 +17,7 @@
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
-        <Button
+        <TextView
             android:id="@+id/product_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
