@@ -39,10 +39,18 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.cart_list_item, parent, false);
         }
-        Button text = (Button) convertView.findViewById(R.id.product_title);
+        TextView text = (TextView) convertView.findViewById(R.id.product_title);
         final Product product = (Product) getItem(position); //TODO possibly unsafe cast
         text.setText(product.getName());
+        View.OnClickListener goToProductDetailsClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigator.goToProductDetails(activity, null, product);
+            }
+        };
+        text.setOnClickListener(goToProductDetailsClickListener);
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
+        image.setOnClickListener(goToProductDetailsClickListener);
         image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
 //        MyNumberField quantity = (MyNumberField) convertView.findViewById(R.id.cart_quantity);
         Integer itemQuantity = productsInCart.get(product);
