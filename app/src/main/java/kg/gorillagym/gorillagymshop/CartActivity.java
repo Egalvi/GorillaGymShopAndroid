@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.CartItem;
+import ru.egalvi.shop.gorillagym.model.Category;
+import ru.egalvi.shop.gorillagym.model.Product;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -55,6 +58,13 @@ public class CartActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Navigator.goToContactDetails(CartActivity.this);
+                }
+            });
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Product itemAtPosition = (Product) parent.getItemAtPosition(position);
+                    Navigator.goToProductDetails(CartActivity.this, null, itemAtPosition);
                 }
             });
             clearCartButton.setOnClickListener(new View.OnClickListener() {

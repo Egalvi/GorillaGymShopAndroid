@@ -3,10 +3,12 @@ package kg.gorillagym.gorillagymshop;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.category_list_item, parent, false);
         }
-        Button text = (Button) convertView.findViewById(R.id.category_title);
+        TextView text = (TextView) convertView.findViewById(R.id.category_title);
         final Category category = getItem(position);
         text.setText(category.getName());
         return convertView;
