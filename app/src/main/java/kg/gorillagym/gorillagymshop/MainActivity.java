@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -17,6 +18,8 @@ import kg.gorillagym.gorillagymshop.async.CategoryLoaderTask;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import ru.egalvi.shop.gorillagym.model.Category;
+import ru.egalvi.shop.gorillagym.model.Product;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
             });
             final ListView lv = (ListView) findViewById(R.id.listView);
             new CategoryLoaderTask(MainActivity.this, lv).execute();
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Category itemAtPosition = (Category) parent.getItemAtPosition(position);
+                    Navigator.goToProducts(MainActivity.this, itemAtPosition);
+                }
+            });
         }
     }
 
