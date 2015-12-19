@@ -2,7 +2,10 @@ package kg.gorillagym.gorillagymshop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +42,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         final Product product = getItem(position);
         text.setText(product.getName());
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
-        image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(Resources.getSystem(), BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
+        roundedBitmapDrawable.setCircular(true);
+        image.setImageDrawable(roundedBitmapDrawable);
         TextView price = (TextView) convertView.findViewById(R.id.product_price);
         price.setText(String.valueOf(product.getPrice()) + " " + activity.getString(R.string.currency));
         return convertView;

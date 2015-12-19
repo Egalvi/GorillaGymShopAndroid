@@ -2,7 +2,10 @@ package kg.gorillagym.gorillagymshop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +54,9 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
         text.setOnClickListener(goToProductDetailsClickListener);
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
         image.setOnClickListener(goToProductDetailsClickListener);
-        image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(Resources.getSystem(), BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
+        roundedBitmapDrawable.setCircular(true);
+        image.setImageDrawable(roundedBitmapDrawable);
 //        MyNumberField quantity = (MyNumberField) convertView.findViewById(R.id.cart_quantity);
         Integer itemQuantity = productsInCart.get(product);
 //        quantity.setValue(itemQuantity);
