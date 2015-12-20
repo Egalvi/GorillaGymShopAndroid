@@ -49,6 +49,7 @@
                 android:id="@+id/plus_button"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
+                style="@style/ButtonStyle"
                 android:text="+" />
 
             <EditText
@@ -62,6 +63,7 @@
                 android:id="@+id/minus_button"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
+                style="@style/ButtonStyle"
                 android:text="-" />
 
         </LinearLayout>
