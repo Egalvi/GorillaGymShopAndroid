@@ -34,9 +34,16 @@
         android:layout_gravity="center"
         android:indeterminate="true" />
 
-    <ListView
+    <GridView
+        android:numColumns="2"
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="30sp"
+        android:verticalSpacing="10sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
+        android:layout_marginLeft="15sp"
+        android:layout_marginRight="15sp" />
 
 </LinearLayout>

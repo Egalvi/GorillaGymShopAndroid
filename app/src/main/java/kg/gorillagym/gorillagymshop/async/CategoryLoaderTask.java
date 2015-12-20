@@ -3,12 +3,11 @@ package kg.gorillagym.gorillagymshop.async;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import kg.gorillagym.gorillagymshop.CategoryAdapter;
 import kg.gorillagym.gorillagymshop.MainActivity;
@@ -22,9 +21,9 @@ import ru.egalvi.shop.gorillagym.service.CategoryService;
 public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
     Collection<Category> categories;
     Activity categoryActivity;
-    ListView categoryListView;
+    AbsListView categoryListView;
 
-    public CategoryLoaderTask(Activity categoryActivity, ListView categoryListView) {
+    public CategoryLoaderTask(Activity categoryActivity, AbsListView categoryListView) {
         this.categoryActivity = categoryActivity;
         this.categoryListView = categoryListView;
     }

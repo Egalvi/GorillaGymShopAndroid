@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.GridView;
 
 import kg.gorillagym.gorillagymshop.async.CategoryLoaderTask;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     Navigator.goToCart(MainActivity.this);
                 }
             });
-            final ListView lv = (ListView) findViewById(R.id.listView);
+            final GridView lv = (GridView) findViewById(R.id.listView);
             new CategoryLoaderTask(MainActivity.this, lv).execute();
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
