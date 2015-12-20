@@ -1,6 +1,7 @@
 package kg.gorillagym.gorillagymshop.async;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -51,7 +52,7 @@ public class URLImageParser implements Html.ImageGetter {
         @Override
         protected Drawable doInBackground(String... params) {
             String source = params[0];
-            return fetchDrawable(source);
+            return fetchScaledDrawable(source);
         }
 
         @Override
@@ -69,7 +70,7 @@ public class URLImageParser implements Html.ImageGetter {
         }
 
         /***
-         * Get the Drawable from URL
+         * Gets the Drawable from URL
          *
          * @param urlString
          * @return
@@ -79,6 +80,28 @@ public class URLImageParser implements Html.ImageGetter {
                 InputStream is = new java.net.URL(urlString).openStream();
                 Drawable drawable = Drawable.createFromStream(is, "src");
                 drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                return drawable;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        /***
+         * Gets the Drawable from URL scaled to fit container width
+         *
+         * @param urlString
+         * @return
+         */
+        public Drawable fetchScaledDrawable(String urlString) {
+            try {
+                Drawable drawable = fetchDrawable(urlString);
+                Bitmap b = ((BitmapDrawable)drawable).getBitmap();
+                double coef = (double) container.getWidth() / drawable.getIntrinsicWidth();
+                int dstWidth = Double.valueOf(drawable.getIntrinsicWidth() * coef).intValue();
+                int dstHeight = Double.valueOf(drawable.getIntrinsicHeight() * coef).intValue();
+                Bitmap bitmapResized = Bitmap.createScaledBitmap(b, dstWidth, dstHeight, false);
+                drawable = new BitmapDrawable(container.getResources(), bitmapResized);
+                drawable.setBounds(0, 0, dstWidth, dstHeight);
                 return drawable;
             } catch (Exception e) {
                 return null;
