@@ -19,7 +19,6 @@ import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
-import ru.egalvi.shop.gorillagym.model.Product;
 
 public class MainActivity extends AppCompatActivity {
 
