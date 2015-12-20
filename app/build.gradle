@@ -45,14 +45,15 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile 'ru.egalvi.shop:gorillagym-model:1.0-SNAPSHOT'
 
 //    compile 'ru.egalvi.shop:test-service:1.0-SNAPSHOT'
-    compile 'ru.egalvi.shop:gorillagym-content-service:1.0-SNAPSHOT'
     compile('com.vincentbrison.openlibraries.android:dualcache:2.2.2@jar') {
         transitive = true
     }
-    compile 'org.kefirsf:kefirbb:1.0'
 
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'ru.egalvi.shop:gorillagym-model:1.0-SNAPSHOT'
+    compile 'ru.egalvi.shop:gorillagym-content-service:1.0-SNAPSHOT'
+    compile 'org.kefirsf:kefirbb:1.0'
+    compile 'com.android.support:design:23.1.1'
 }

@@ -37,4 +37,14 @@
     <string name="please_fill_the_field">Пожалуйста, заполните поле %s</string>
     <string name="no_internet_access_title">Отсутствует подключение к Internet</string>
     <string name="no_internet_access_message">Приложению для работы необходимо активное подключение к сети Internet. Подключите устройство к сети Internet и запустите приложение снова.</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
 </resources>
