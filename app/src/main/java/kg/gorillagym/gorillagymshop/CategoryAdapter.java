@@ -2,6 +2,8 @@ package kg.gorillagym.gorillagymshop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +31,10 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         }
         TextView text = (TextView) convertView.findViewById(R.id.category_title);
         ImageView image = (ImageView) convertView.findViewById(R.id.category_image);
-        image.setImageDrawable(convertView.getResources().getDrawable(R.drawable.catstub));
         final Category category = getItem(position);
+        image.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(category.getImageData(), 0, category.getImageData().length)));
         text.setText(category.getName());
+        text.setVisibility(View.GONE);
         return convertView;
     }
 }
