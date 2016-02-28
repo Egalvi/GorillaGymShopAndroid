@@ -12,6 +12,7 @@
         android:id="@+id/productDetailsLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -42,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="0dp"
                     style="@style/ButtonStyle"
-                    android:text="Положить в корзину" />
+                    android:text="Добавить в корзину" />
 
                 <TextView
                     android:id="@+id/product_old_price"
