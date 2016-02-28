@@ -48,6 +48,7 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         categoryActivity.findViewById(R.id.loadingIndicator).setVisibility(View.VISIBLE);
+        categoryActivity.findViewById(R.id.chooseCategory).setVisibility(View.GONE);
     }
 
     @Override
@@ -62,6 +63,7 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
         }
         CacheHolder.getCache().putProducts(MainActivity.PRODUCTS_CACHE_NAME, productsCache);
         categoryActivity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
+        categoryActivity.findViewById(R.id.chooseCategory).setVisibility(View.VISIBLE);
         ArrayAdapter<Category> arrayAdapter = new CategoryAdapter(categoryActivity,
                 R.layout.category_list_item, new ArrayList<>(categories));
         categoryListView.setAdapter(arrayAdapter);
