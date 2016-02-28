@@ -23,15 +23,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_toRightOf="@id/product_image"
-            android:gravity="center" />
+            android:gravity="left" />
 
         <TextView
             android:id="@+id/product_price"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp" />
+            android:layout_margin="5dp"
+            android:gravity="left" />
     </LinearLayout>
 
 </LinearLayout>
