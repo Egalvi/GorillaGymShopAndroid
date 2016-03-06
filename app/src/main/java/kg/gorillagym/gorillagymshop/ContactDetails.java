@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import ru.egalvi.shop.Capture;
 import ru.egalvi.shop.Cart;
 import ru.egalvi.shop.CartService;
 import ru.egalvi.shop.ClientData;
@@ -46,6 +47,11 @@ public class ContactDetails extends AppCompatActivity {
             @Override
             public void checkout(Cart cart, ClientData clientData) {
 
+            }
+
+            @Override
+            public Capture getCapture() {
+                return null;
             }
         };
 
