@@ -37,4 +37,12 @@
     <string name="please_fill_the_field">Пожалуйста введите %s</string>
     <string name="no_internet_access_title">Отсутствует подключение к Internet</string>
     <string name="no_internet_access_message">Приложению для работы необходимо активное подключение к сети Internet. Подключите устройство к сети Internet и запустите приложение снова.</string>
+
+    <string name="client_details_email">E-mail:</string>
+    <string name="client_details_name">Имя:</string>
+    <string name="client_details_phone">Контактный телефон:</string>
+    <string name="client_details_address">Улица, дом, кв:</string>
+    <string name="client_details_capture">Код подтверждения:</string>
+    <string name="client_details_clear">Очистить</string>
+    <string name="client_details_send">Отправить</string>
 </resources>

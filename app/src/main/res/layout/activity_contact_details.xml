@@ -6,16 +6,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="kg.gorillagym.gorillagymshop.ContactDetails"
-    android:stretchColumns="1">
+    android:stretchColumns="1"
+    tools:context="kg.gorillagym.gorillagymshop.ContactDetails">
 
 
-    <TableRow>
+    <TableRow android:layout_width="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="email" />
+            android:text="@string/client_details_email" />
 
         <EditText
             android:id="@+id/edit_email"
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="name" />
+            android:text="@string/client_details_name" />
 
         <EditText
             android:id="@+id/edit_name"
@@ -43,7 +43,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="contact phone" />
+            android:text="@string/client_details_phone" />
 
         <EditText
             android:id="@+id/edit_phone"
@@ -57,7 +57,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="street, building, room" />
+            android:text="@string/client_details_address" />
 
         <EditText
             android:id="@+id/edit_address"
@@ -84,7 +84,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Verification code" />
+            android:text="@string/client_details_capture" />
 
         <EditText
             android:id="@+id/edit_verification_code"
@@ -93,22 +93,28 @@
             android:inputType="textPostalAddress" />
     </TableRow>
 
-    <TableRow>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_clear"
+            style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:text="Очистить" />
+            android:layout_weight="1"
+            android:text="@string/client_details_clear" />
 
         <Button
             android:id="@+id/button_send"
+            style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:text="Отправить" />
+            android:layout_weight="1"
+            android:text="@string/client_details_send" />
 
-    </TableRow>
+    </LinearLayout>
 
 </TableLayout>
