@@ -1,4 +1,4 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,115 +6,126 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:stretchColumns="1"
     tools:context="kg.gorillagym.gorillagymshop.ContactDetails">
 
-
-    <TableRow android:layout_width="wrap_content">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="@string/client_details_email" />
-
-        <EditText
-            android:id="@+id/edit_email"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:inputType="textEmailAddress" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="@string/client_details_name" />
-
-        <EditText
-            android:id="@+id/edit_name"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:inputType="textPersonName" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="@string/client_details_phone" />
-
-        <EditText
-            android:id="@+id/edit_phone"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:inputType="phone" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="@string/client_details_address" />
-
-        <EditText
-            android:id="@+id/edit_address"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:inputType="textPostalAddress" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="" />
-
-        <ImageView
-            android:id="@+id/capture_image"
-            android:layout_width="match_parent"
-            android:layout_gravity="center_vertical" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="@string/client_details_capture" />
-
-        <EditText
-            android:id="@+id/edit_verification_code"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:inputType="textPostalAddress" />
-    </TableRow>
-
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_clear"
-            style="@style/ButtonStyle"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:text="@string/client_details_clear" />
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
 
-        <Button
-            android:id="@+id/button_send"
-            style="@style/ButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:text="@string/client_details_send" />
+            <TableRow android:layout_width="match_parent">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="@string/client_details_email" />
+
+                <EditText
+                    android:id="@+id/edit_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="textEmailAddress" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="@string/client_details_name" />
+
+                <EditText
+                    android:id="@+id/edit_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="@string/client_details_phone" />
+
+                <EditText
+                    android:id="@+id/edit_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="phone" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="@string/client_details_address" />
+
+                <EditText
+                    android:id="@+id/edit_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="textPostalAddress" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="" />
+
+                <ImageView
+                    android:id="@+id/capture_image"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="@string/client_details_capture" />
+
+                <EditText
+                    android:id="@+id/edit_verification_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="textPostalAddress" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_clear"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:text="@string/client_details_clear" />
+
+            <Button
+                android:id="@+id/button_send"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:text="@string/client_details_send" />
+
+        </LinearLayout>
     </LinearLayout>
 
-</TableLayout>
+</ScrollView>
