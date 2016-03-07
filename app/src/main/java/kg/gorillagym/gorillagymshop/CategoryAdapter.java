@@ -2,8 +2,10 @@ package kg.gorillagym.gorillagymshop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import ru.egalvi.shop.gorillagym.model.Category;
@@ -32,9 +35,18 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         TextView text = (TextView) convertView.findViewById(R.id.category_title);
         ImageView image = (ImageView) convertView.findViewById(R.id.category_image);
         final Category category = getItem(position);
-        image.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(category.getImageData(), 0, category.getImageData().length)));
+        int width = Double.valueOf(activity.getWindowManager().getDefaultDisplay().getWidth() * 0.35).intValue();
+        BitmapDrawable scaledToWidth = getImageScaledToWidth(Drawable.createFromStream(new ByteArrayInputStream(category.getImageData()), "src"), width);
+        image.setImageDrawable(scaledToWidth);
         text.setText(category.getName());
         text.setVisibility(View.GONE);
         return convertView;
+    }
+
+    //TODO move to Utils some day
+    private BitmapDrawable getImageScaledToWidth(Drawable src, int width) {
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(((BitmapDrawable) src).getBitmap(), width,
+                Double.valueOf((double) width / src.getIntrinsicWidth() * src.getIntrinsicHeight()).intValue(), false);
+        return new BitmapDrawable(activity.getResources(), scaledBitmap);
     }
 }
