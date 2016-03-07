@@ -15,6 +15,7 @@ import kg.gorillagym.gorillagymshop.async.CaptureLoaderTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import kg.gorillagym.shop.cart.GorillaGymCartService;
+import kg.gorillagym.shop.cart.GorillaGymClientData;
 import ru.egalvi.shop.CartService;
 import ru.egalvi.shop.ClientData;
 
@@ -50,6 +51,7 @@ public class ContactDetails extends AppCompatActivity {
         final EditText nameField = (EditText) findViewById(R.id.edit_name);
         final EditText addressField = (EditText) findViewById(R.id.edit_address);
         final EditText phoneField = (EditText) findViewById(R.id.edit_phone);
+        final EditText captureField = (EditText) findViewById(R.id.edit_verification_code);
 
         SharedPreferences preferences = getPreferences(0);
         final String savedEmail = preferences.getString(EMAIL_FIELD, "");
@@ -71,27 +73,10 @@ public class ContactDetails extends AppCompatActivity {
                 final String name = nameField.getText().toString();
                 final String address = addressField.getText().toString();
                 final String phone = phoneField.getText().toString();
-                //Validate for empty fields
-                if (email.trim().isEmpty()) {
-                    emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "email")).show();
-                    emailField.requestFocus();
+                final String capture = captureField.getText().toString();
+                if (validateForEmptyFields(email, name, address, phone, capture, emailField, nameField, addressField, phoneField, captureField))
                     return;
-                }
-                if (name.trim().isEmpty()) {
-                    emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "имя")).show();
-                    nameField.requestFocus();
-                    return;
-                }
-                if (address.trim().isEmpty()) {
-                    emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "адрес")).show();
-                    addressField.requestFocus();
-                    return;
-                }
-                if (phone.trim().isEmpty()) {
-                    emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "телефон")).show();
-                    phoneField.requestFocus();
-                    return;
-                }
+
                 //Check that fields are not equal to previously saved
                 if (!savedEmail.equals(email) || !savedName.equals(name) || !savedAddress.equals(address) || !savedPhone.equals(phone)) {
                     new AlertDialog.Builder(ContactDetails.this)
@@ -116,8 +101,8 @@ public class ContactDetails extends AppCompatActivity {
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                 }
-                cartService.checkout(CartHolder.getCart(), new ClientData() {
-                });
+                ClientData clientData = new GorillaGymClientData(email, name, phone, address, token, capture);
+                cartService.checkout(CartHolder.getCart(), clientData);
             }
         });
         Button clearButton = (Button) findViewById(R.id.button_clear);
@@ -146,6 +131,36 @@ public class ContactDetails extends AppCompatActivity {
 
             }
         });
+    }
+
+    private boolean validateForEmptyFields(String email, String name, String address, String phone, String capture, EditText emailField, EditText nameField, EditText addressField, EditText phoneField, EditText captureField) {
+        //Validate for empty fields
+        if (email.trim().isEmpty()) {
+            emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "email")).show();
+            emailField.requestFocus();
+            return true;
+        }
+        if (name.trim().isEmpty()) {
+            emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "имя")).show();
+            nameField.requestFocus();
+            return true;
+        }
+        if (address.trim().isEmpty()) {
+            emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "адрес")).show();
+            addressField.requestFocus();
+            return true;
+        }
+        if (phone.trim().isEmpty()) {
+            emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "телефон")).show();
+            phoneField.requestFocus();
+            return true;
+        }
+        if (capture.trim().isEmpty()) {
+            emptyFieldDialog.setMessage(String.format(getString(R.string.please_fill_the_field), "проверочный код")).show();
+            captureField.requestFocus();
+            return true;
+        }
+        return false;
     }
 
     @Override
