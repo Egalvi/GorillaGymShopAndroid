@@ -1,7 +1,10 @@
 package kg.gorillagym.gorillagymshop.async;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -37,7 +40,17 @@ public class CaptureLoaderTask extends AsyncTask<Void, Void, Void> {
         super.onPostExecute(aVoid);
         ImageView image = (ImageView) cartActivity.findViewById(R.id.capture_image);
         image.setVisibility(View.VISIBLE);
-        image.setImageDrawable(Drawable.createFromStream(new ByteArrayInputStream(capture.getImagedata()), ""));
+        int width = cartActivity.findViewById(R.id.edit_verification_code).getWidth();
+        BitmapDrawable drawable = getImageScaledToWidth(width);
+        image.setImageDrawable(drawable);
         cartActivity.setToken(capture.getToken());
+    }
+
+    @NonNull
+    private BitmapDrawable getImageScaledToWidth(int width) {
+        Drawable src = Drawable.createFromStream(new ByteArrayInputStream(capture.getImagedata()), "src");
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(((BitmapDrawable) src).getBitmap(), width,
+                Double.valueOf((double) width / src.getIntrinsicWidth() * src.getIntrinsicHeight()).intValue(), false);
+        return new BitmapDrawable(cartActivity.getResources(), scaledBitmap);
     }
 }
