@@ -17,7 +17,6 @@ import android.widget.Toast;
 import org.kefirsf.bb.BBProcessorFactory;
 import org.kefirsf.bb.TextProcessor;
 
-import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
 import kg.gorillagym.gorillagymshop.async.URLImageParser;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;

@@ -8,14 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import kg.gorillagym.gorillagymshop.async.CaptureLoaderTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
-import ru.egalvi.shop.Capture;
-import ru.egalvi.shop.Cart;
+import kg.gorillagym.shop.cart.GorillaGymCartService;
 import ru.egalvi.shop.CartService;
 import ru.egalvi.shop.ClientData;
 
@@ -25,6 +24,8 @@ public class ContactDetails extends AppCompatActivity {
     public static final String NAME_FIELD = "name";
     public static final String ADDRESS_FIELD = "address";
     public static final String PHONE_FIELD = "phone";
+
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +44,7 @@ public class ContactDetails extends AppCompatActivity {
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert);
-        final CartService cartService = new CartService() {
-            @Override
-            public void checkout(Cart cart, ClientData clientData) {
-
-            }
-
-            @Override
-            public Capture getCapture() {
-                return null;
-            }
-        };
+        final CartService cartService = new GorillaGymCartService();
 
         final EditText emailField = (EditText) findViewById(R.id.edit_email);
         final EditText nameField = (EditText) findViewById(R.id.edit_name);
@@ -69,6 +60,8 @@ public class ContactDetails extends AppCompatActivity {
         addressField.setText(savedAddress);
         final String savedPhone = preferences.getString(PHONE_FIELD, "");
         phoneField.setText(savedPhone);
+
+        new CaptureLoaderTask(this).execute();
 
         Button sendButton = (Button) findViewById(R.id.button_send);
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -178,4 +171,13 @@ public class ContactDetails extends AppCompatActivity {
     }
 
     AlertDialog.Builder emptyFieldDialog;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
 }

@@ -18,7 +18,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Map;
 
-import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.CartItem;

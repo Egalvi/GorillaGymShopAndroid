@@ -10,14 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-import kg.gorillagym.gorillagymshop.async.DownloadImageTask;
-import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 
