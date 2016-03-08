@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import kg.gorillagym.gorillagymshop.CategoryAdapter;
 import kg.gorillagym.gorillagymshop.MainActivity;
@@ -16,10 +18,11 @@ import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cache.impl.CacheImpl;
 import kg.gorillagym.shop.content.GorillaGymCategoryService;
 import ru.egalvi.shop.gorillagym.model.Category;
+import ru.egalvi.shop.gorillagym.model.CategorySortComparator;
 import ru.egalvi.shop.gorillagym.service.CategoryService;
 
 public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
-    Collection<Category> categories;
+    List<Category> categories;
     Activity categoryActivity;
     AbsListView categoryListView;
 
@@ -32,7 +35,8 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... params) {
         CacheImpl.ProductCacheHolder products = CacheHolder.getCache().getProducts(MainActivity.PRODUCTS_CACHE_NAME);
         if (products != null && !products.getCategories().isEmpty()) {
-            categories = products.getCategories();
+            categories = new ArrayList<>(products.getCategories());
+            Collections.sort(categories, new CategorySortComparator());
         } else {
             CategoryService carrierService = new GorillaGymCategoryService();
             try {
