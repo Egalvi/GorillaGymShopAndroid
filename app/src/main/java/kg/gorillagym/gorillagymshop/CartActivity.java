@@ -3,7 +3,6 @@ package kg.gorillagym.gorillagymshop;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +15,11 @@ import android.widget.TextView;
 
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import kg.gorillagym.gorillagymshop.util.AppCompatActivityWithBackButton;
 import ru.egalvi.shop.CartItem;
-import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivityWithBackButton {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {

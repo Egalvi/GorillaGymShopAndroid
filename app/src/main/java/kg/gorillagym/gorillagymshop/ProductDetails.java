@@ -3,7 +3,6 @@ package kg.gorillagym.gorillagymshop;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.Menu;
@@ -21,10 +20,11 @@ import kg.gorillagym.gorillagymshop.async.URLImageParser;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import kg.gorillagym.gorillagymshop.util.AppCompatActivityWithBackButton;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 
-public class ProductDetails extends AppCompatActivity {
+public class ProductDetails extends AppCompatActivityWithBackButton {
     private Menu menu;
 
     private Category category;

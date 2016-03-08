@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +13,13 @@ import android.widget.EditText;
 import kg.gorillagym.gorillagymshop.async.CaptureLoaderTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import kg.gorillagym.gorillagymshop.util.AppCompatActivityWithBackButton;
 import kg.gorillagym.shop.cart.GorillaGymCartService;
 import kg.gorillagym.shop.cart.GorillaGymClientData;
 import ru.egalvi.shop.CartService;
 import ru.egalvi.shop.ClientData;
 
-public class ContactDetails extends AppCompatActivity {
+public class ContactDetails extends AppCompatActivityWithBackButton {
 
     public static final String EMAIL_FIELD = "email";
     public static final String NAME_FIELD = "name";

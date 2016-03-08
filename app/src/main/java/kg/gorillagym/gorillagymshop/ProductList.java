@@ -1,7 +1,6 @@
 package kg.gorillagym.gorillagymshop;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,10 +10,11 @@ import android.widget.ListView;
 
 import kg.gorillagym.gorillagymshop.async.ProductLoaderTask;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
+import kg.gorillagym.gorillagymshop.util.AppCompatActivityWithBackButton;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 
-public class ProductList extends AppCompatActivity {
+public class ProductList extends AppCompatActivityWithBackButton {
 
     private Category category;
 
