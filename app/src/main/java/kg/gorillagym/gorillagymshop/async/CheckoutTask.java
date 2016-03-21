@@ -9,10 +9,11 @@ import kg.gorillagym.gorillagymshop.ContactDetails;
 import kg.gorillagym.gorillagymshop.R;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.shop.cart.GorillaGymCartService;
+import ru.egalvi.shop.CheckoutResponse;
 import ru.egalvi.shop.ClientData;
 
 public class CheckoutTask extends AsyncTask<Void, Void, Void> {
-    String checkout;
+    CheckoutResponse checkout;
     ContactDetails contactDetailsActivity;
     ClientData clientData;
 
@@ -50,7 +51,12 @@ public class CheckoutTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        emptyFieldDialog.setMessage(checkout).show();
+        if(!"0".equals(checkout.getErrorCode())) {
+            emptyFieldDialog.setMessage(checkout.getError()).setIcon(android.R.drawable.ic_dialog_alert).show();
+        } else {
+            //TODO handle successfull checkout
+            emptyFieldDialog.setMessage(checkout.getError()).setIcon(android.R.drawable.ic_dialog_info).show();
+        }
     }
 
 }
