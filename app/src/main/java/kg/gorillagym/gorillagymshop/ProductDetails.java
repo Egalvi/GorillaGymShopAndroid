@@ -50,8 +50,13 @@ public class ProductDetails extends AppCompatActivityWithBackButton {
             Spanned spanned = Html.fromHtml(processor.process(product.getText()).replaceAll("\\[center\\]", "").replaceAll("\\[/center\\]", ""), imageGetter, null);
             setTitle(product.getName());
             name.setText(product.getName());
+            byte[] imageData = product.getImageData();
             ImageView image = (ImageView) findViewById(R.id.product_image);
-            image.setImageBitmap(BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
+            if (imageData != null && imageData.length > 0) {
+                image.setImageBitmap(BitmapFactory.decodeByteArray(imageData, 0, imageData.length));
+            } else {
+                image.setImageDrawable(null);
+            }
             description.setText(spanned);
             price.setText(product.getPrice() + " " + getString(R.string.currency));
             if (product.getOldprice() > 0) {

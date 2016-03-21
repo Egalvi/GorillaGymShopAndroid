@@ -17,33 +17,33 @@ import ru.egalvi.shop.Capture;
 
 public class CaptureLoaderTask extends AsyncTask<Void, Void, Void> {
     Capture capture;
-    ContactDetails cartActivity;
+    ContactDetails contactDetailsActivity;
 
-    public CaptureLoaderTask(ContactDetails cartActivity) {
-        this.cartActivity = cartActivity;
-    }
+        public CaptureLoaderTask(ContactDetails contactDetailsActivity) {
+            this.contactDetailsActivity = contactDetailsActivity;
+        }
 
-    @Override
-    protected Void doInBackground(Void... params) {
-        capture = new GorillaGymCartService().getCapture();
-        return null;
-    }
+        @Override
+        protected Void doInBackground(Void... params) {
+            capture = new GorillaGymCartService().getCapture();
+            return null;
+        }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        cartActivity.findViewById(R.id.capture_image).setVisibility(View.GONE);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        contactDetailsActivity.findViewById(R.id.capture_image).setVisibility(View.GONE);
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        ImageView image = (ImageView) cartActivity.findViewById(R.id.capture_image);
+        ImageView image = (ImageView) contactDetailsActivity.findViewById(R.id.capture_image);
         image.setVisibility(View.VISIBLE);
-        int width = cartActivity.findViewById(R.id.edit_verification_code).getWidth();
+        int width = contactDetailsActivity.findViewById(R.id.edit_verification_code).getWidth();
         BitmapDrawable drawable = getImageScaledToWidth(width);
         image.setImageDrawable(drawable);
-        cartActivity.setToken(capture.getToken());
+        contactDetailsActivity.setToken(capture.getToken());
     }
 
     @NonNull
@@ -51,6 +51,6 @@ public class CaptureLoaderTask extends AsyncTask<Void, Void, Void> {
         Drawable src = Drawable.createFromStream(new ByteArrayInputStream(capture.getImagedata()), "src");
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(((BitmapDrawable) src).getBitmap(), width,
                 Double.valueOf((double) width / src.getIntrinsicWidth() * src.getIntrinsicHeight()).intValue(), false);
-        return new BitmapDrawable(cartActivity.getResources(), scaledBitmap);
+        return new BitmapDrawable(contactDetailsActivity.getResources(), scaledBitmap);
     }
 }

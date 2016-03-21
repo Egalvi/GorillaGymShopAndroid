@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import kg.gorillagym.gorillagymshop.async.CaptureLoaderTask;
+import kg.gorillagym.gorillagymshop.async.CheckoutTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import kg.gorillagym.gorillagymshop.util.AppCompatActivityWithBackButton;
@@ -102,7 +103,7 @@ public class ContactDetails extends AppCompatActivityWithBackButton {
                             .show();
                 }
                 ClientData clientData = new GorillaGymClientData(email, name, phone, address, token, capture);
-                cartService.checkout(CartHolder.getCart(), clientData);
+                new CheckoutTask(ContactDetails.this, clientData).execute();
             }
         });
         Button clearButton = (Button) findViewById(R.id.button_clear);

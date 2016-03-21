@@ -38,10 +38,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         TextView text = (TextView) convertView.findViewById(R.id.product_title);
         final Product product = getItem(position);
         text.setText(product.getName());
+        byte[] imageData = product.getImageData();
         ImageView image = (ImageView) convertView.findViewById(R.id.product_image);
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(Resources.getSystem(), BitmapFactory.decodeByteArray(product.getImageData(), 0, product.getImageData().length));
-        roundedBitmapDrawable.setCircular(true);
-        image.setImageDrawable(roundedBitmapDrawable);
+        if (imageData != null && imageData.length > 0) {
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(Resources.getSystem(), BitmapFactory.decodeByteArray(imageData, 0, imageData.length));
+            roundedBitmapDrawable.setCircular(true);
+            image.setImageDrawable(roundedBitmapDrawable);
+        } else {
+            image.setImageDrawable(null);
+        }
         TextView price = (TextView) convertView.findViewById(R.id.product_price);
         price.setText(String.valueOf(product.getPrice()) + " " + activity.getString(R.string.currency));
         return convertView;

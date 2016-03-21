@@ -33,11 +33,16 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             convertView = inflater.inflate(R.layout.category_list_item, parent, false);
         }
         TextView text = (TextView) convertView.findViewById(R.id.category_title);
-        ImageView image = (ImageView) convertView.findViewById(R.id.category_image);
         final Category category = getItem(position);
-        int width = Double.valueOf(activity.getWindowManager().getDefaultDisplay().getWidth() * 0.35).intValue();
-        BitmapDrawable scaledToWidth = getImageScaledToWidth(Drawable.createFromStream(new ByteArrayInputStream(category.getImageData()), "src"), width);
-        image.setImageDrawable(scaledToWidth);
+        byte[] imageData = category.getImageData();
+        ImageView image = (ImageView) convertView.findViewById(R.id.category_image);
+        if (imageData != null && imageData.length > 0) {
+            int width = Double.valueOf(activity.getWindowManager().getDefaultDisplay().getWidth() * 0.35).intValue();
+            BitmapDrawable scaledToWidth = getImageScaledToWidth(Drawable.createFromStream(new ByteArrayInputStream(imageData), "src"), width);
+            image.setImageDrawable(scaledToWidth);
+        } else {
+            image.setImageDrawable(null);
+        }
         text.setText(category.getName());
         text.setVisibility(View.GONE);
         return convertView;
