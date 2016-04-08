@@ -3,6 +3,7 @@ package kg.gorillagym.gorillagymshop.async;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,7 +16,8 @@ import kg.gorillagym.gorillagymshop.ProductAdapter;
 import kg.gorillagym.gorillagymshop.R;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cache.impl.CacheImpl;
-import kg.gorillagym.shop.content.GorillaGymProductService;
+import kg.gorillagym.shop.content.cachedpicture.Cache;
+import kg.gorillagym.shop.content.cachedpicture.GorillaGymProductService;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.Product;
 import ru.egalvi.shop.gorillagym.service.ProductService;
@@ -38,7 +40,24 @@ public class ProductLoaderTask extends AsyncTask<Void, Void, Void> {
         if (productsCache != null && productsCache.get(category) != null && !productsCache.get(category).isEmpty()) {
             products = productsCache.get(category);
         } else {
-            ProductService productService = new GorillaGymProductService();
+            ProductService productService = new GorillaGymProductService(new Cache<byte[]>() {
+                @Override
+                public void put(String key, byte[] value) {
+                    String fixedKey = fixKey(key);
+                    CacheHolder.getCache().putImage(fixedKey, value);
+                }
+
+                @Nullable
+                private String fixKey(String key) {
+                    return (key == null) ? null : key.replace("http","").replace("www","").replace("/","").replace(".", "").replace(":","").toLowerCase();
+                }
+
+                @Override
+                public byte[] get(String key) {
+                    String fixedKey = fixKey(key);
+                    return CacheHolder.getCache().getImage(fixedKey);
+                }
+            });
             try {
                 products = productService.getForCategory(category);
             } catch (Exception e) {

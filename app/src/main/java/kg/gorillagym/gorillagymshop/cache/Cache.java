@@ -11,4 +11,8 @@ public interface Cache {
     void putCart(String key, Cart value);
 
     Cart getCart(String key);
+
+    void putImage(String key, byte[] value);
+
+    byte[] getImage(String key);
 }

@@ -2,12 +2,12 @@ package kg.gorillagym.gorillagymshop.async;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,7 +16,8 @@ import kg.gorillagym.gorillagymshop.MainActivity;
 import kg.gorillagym.gorillagymshop.R;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cache.impl.CacheImpl;
-import kg.gorillagym.shop.content.GorillaGymCategoryService;
+import kg.gorillagym.shop.content.cachedpicture.Cache;
+import kg.gorillagym.shop.content.cachedpicture.GorillaGymCategoryService;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.CategorySortComparator;
 import ru.egalvi.shop.gorillagym.service.CategoryService;
@@ -38,7 +39,24 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
             categories = new ArrayList<>(products.getCategories());
             Collections.sort(categories, new CategorySortComparator());
         } else {
-            CategoryService carrierService = new GorillaGymCategoryService();
+            CategoryService carrierService = new GorillaGymCategoryService(new Cache<byte[]>() {
+                @Override
+                public void put(String key, byte[] value) {
+                    String fixedKey = fixKey(key);
+                    CacheHolder.getCache().putImage(fixedKey, value);
+                }
+
+                @Nullable
+                private String fixKey(String key) {
+                    return (key == null) ? null : key.replace("http","").replace("www","").replace("/","").replace(".","").replace(":","").toLowerCase();
+                }
+
+                @Override
+                public byte[] get(String key) {
+                    String fixedKey = fixKey(key);
+                    return CacheHolder.getCache().getImage(fixedKey);
+                }
+            });
             try {
                 categories = carrierService.getAll();
             } catch (Exception e) {

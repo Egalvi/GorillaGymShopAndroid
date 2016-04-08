@@ -25,6 +25,7 @@ public class CacheImpl implements Cache {
 
     private static final String PRODUCT_CACHE_NAME = "product_cache";
     private static final String CART_CACHE_NAME = "cart_cache";
+    private static final String PICTURE_CACHE_NAME = "picture_cache";
     private static final int APP_VERSION = 0;
     private static final int RAM_MAX_SIZE = 128;
     private static final int DISK_MAX_SIZE = 512;
@@ -32,6 +33,8 @@ public class CacheImpl implements Cache {
     private DualCache<ProductCacheHolder> productCache;
 
     private DualCache<Cart> cartCache;
+
+    private DualCache<byte[]> pictureCache;
 
     public CacheImpl(Context context) {
         DualCacheContextUtils.setContext(context);
@@ -43,6 +46,12 @@ public class CacheImpl implements Cache {
         cartCache =
                 new DualCacheBuilder<>(CART_CACHE_NAME, APP_VERSION, Cart.class)
                         .useReferenceInRam(RAM_MAX_SIZE, new SizeOfCart())
+//                        .noRam()
+                        .useDefaultSerializerInDisk(DISK_MAX_SIZE, true);
+
+        pictureCache =
+                new DualCacheBuilder<>(PICTURE_CACHE_NAME, APP_VERSION, byte[].class)
+                        .useReferenceInRam(RAM_MAX_SIZE, new SizeOfByteArray())
 //                        .noRam()
                         .useDefaultSerializerInDisk(DISK_MAX_SIZE, true);
     }
@@ -65,6 +74,16 @@ public class CacheImpl implements Cache {
     @Override
     public Cart getCart(String key) {
         return cartCache.get(key);
+    }
+
+    @Override
+    public void putImage(String key, byte[] value) {
+        pictureCache.put(key, value);
+    }
+
+    @Override
+    public byte[] getImage(String key) {
+        return pictureCache.get(key);
     }
 
     public static class ProductCacheHolder implements Serializable {
@@ -111,6 +130,13 @@ public class CacheImpl implements Cache {
         @Override
         public int sizeOf(Cart object) {
             return object.getOrder().size();
+        }
+    }
+
+    private static class SizeOfByteArray implements SizeOf<byte[]> {
+        @Override
+        public int sizeOf(byte[] object) {
+            return object.length;
         }
     }
 }
