@@ -53,12 +53,15 @@ public class CartActivity extends AppCompatActivityWithBackButton {
                     CartHolder.getCart().getOrder());
             lv.setAdapter(arrayAdapter);
             updateTotalPrice();
+
             checkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //TODO check product availability here
                     Navigator.goToContactDetails(CartActivity.this);
                 }
             });
+
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -66,6 +69,7 @@ public class CartActivity extends AppCompatActivityWithBackButton {
                     Navigator.goToProductDetails(CartActivity.this, null, itemAtPosition);
                 }
             });
+
             clearCartButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
