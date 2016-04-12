@@ -25,6 +25,7 @@
             android:layout_margin="5dp"
             android:gravity="left" />
 
+        <!--TODO extract styles -->
         <TextView
             android:id="@+id/product_price"
             android:layout_width="fill_parent"
