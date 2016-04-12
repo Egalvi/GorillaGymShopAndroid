@@ -24,6 +24,10 @@
             android:label="@string/title_activity_product_list" >
         </activity>
         <activity
+            android:name=".ContactsActivity"
+            android:label="Наши контакты" >
+        </activity>
+        <activity
             android:name=".ProductDetails"
             android:label="@string/title_activity_product_details" >
         </activity>

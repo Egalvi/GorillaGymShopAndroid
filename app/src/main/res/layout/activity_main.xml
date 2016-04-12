@@ -27,6 +27,15 @@
         style="@style/ButtonStyle"
         android:text="@string/cart" />
 
+    <!-- TODO extract strings -->
+    <Button
+        android:id="@+id/contactsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        style="@style/ButtonStyle"
+        android:text="Контакты" />
+
     <ProgressBar
         android:id="@+id/loadingIndicator"
         android:layout_width="wrap_content"

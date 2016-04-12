@@ -51,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
                     Navigator.goToCart(MainActivity.this);
                 }
             });
+            Button contactsButton = (Button) findViewById(R.id.contactsButton);
+            contactsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigator.goToContacts(MainActivity.this);
+                }
+            });
             final GridView lv = (GridView) findViewById(R.id.listView);
             new CategoryLoaderTask(MainActivity.this, lv).execute();
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

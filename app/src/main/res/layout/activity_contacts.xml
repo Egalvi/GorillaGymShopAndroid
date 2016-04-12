@@ -1,0 +1,45 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    tools:context="kg.gorillagym.gorillagymshop.ContactsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="
+100 PUDOV\n
+тел: 0772 18-20-73\n
+        0702 66-67-46\n
+email: time_and_i@mail.ru\n
+\n
+Режим работы\n
+\n
+Понедельник - Суббота\n
+10-00 - 19-00\n
+Воскресенье\n
+12-30 - 19-30 (0552 552 675)\n
+\n
+Адрес\n
+5мкр д. 4/2 (ул. Донецкая/Карла Маркса) \n\n" />
+
+        <ImageView
+            android:id="@+id/mapImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/map" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n\n" />
+
+    </LinearLayout>
+
+</ScrollView>
