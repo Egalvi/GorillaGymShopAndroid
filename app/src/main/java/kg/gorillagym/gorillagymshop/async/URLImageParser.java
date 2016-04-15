@@ -57,6 +57,9 @@ public class URLImageParser implements Html.ImageGetter {
 
         @Override
         protected void onPostExecute(Drawable result) {
+            if (result == null) {
+                return;
+            }
             // set the correct bound according to the result from HTTP call
             urlDrawable.setBounds(0, 0, result.getIntrinsicWidth(), result.getIntrinsicHeight());
 
@@ -95,7 +98,7 @@ public class URLImageParser implements Html.ImageGetter {
         public Drawable fetchScaledDrawable(String urlString) {
             try {
                 Drawable drawable = fetchDrawable(urlString);
-                Bitmap b = ((BitmapDrawable)drawable).getBitmap();
+                Bitmap b = ((BitmapDrawable) drawable).getBitmap();
                 double coef = (double) container.getWidth() / drawable.getIntrinsicWidth();
                 int dstWidth = Double.valueOf(drawable.getIntrinsicWidth() * coef).intValue();
                 int dstHeight = Double.valueOf(drawable.getIntrinsicHeight() * coef).intValue();

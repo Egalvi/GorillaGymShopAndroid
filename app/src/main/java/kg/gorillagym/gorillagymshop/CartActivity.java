@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import kg.gorillagym.gorillagymshop.async.CheckProductsAvailableTask;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
 import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import kg.gorillagym.gorillagymshop.util.AppCompatActivityWithBackButton;
@@ -57,8 +58,7 @@ public class CartActivity extends AppCompatActivityWithBackButton {
             checkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO check product availability here
-                    Navigator.goToContactDetails(CartActivity.this);
+                    new CheckProductsAvailableTask(CartActivity.this, CartHolder.getCart()).execute();
                 }
             });
 
