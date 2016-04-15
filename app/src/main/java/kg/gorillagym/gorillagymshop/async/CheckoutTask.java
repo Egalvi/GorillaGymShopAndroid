@@ -8,6 +8,7 @@ import android.view.View;
 import kg.gorillagym.gorillagymshop.ContactDetails;
 import kg.gorillagym.gorillagymshop.R;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
+import kg.gorillagym.gorillagymshop.navigation.Navigator;
 import kg.gorillagym.shop.cart.GorillaGymCartService;
 import ru.egalvi.shop.CheckoutResponse;
 import ru.egalvi.shop.ClientData;
@@ -18,8 +19,9 @@ public class CheckoutTask extends AsyncTask<Void, Void, Void> {
     ClientData clientData;
 
     AlertDialog.Builder emptyFieldDialog;
+    AlertDialog.Builder successfullCheckoutDialog;
 
-    public CheckoutTask(ContactDetails contactDetailsActivity, ClientData clientData) {
+    public CheckoutTask(final ContactDetails contactDetailsActivity, ClientData clientData) {
         this.contactDetailsActivity = contactDetailsActivity;
         this.clientData = clientData;
         emptyFieldDialog = new AlertDialog.Builder(contactDetailsActivity)
@@ -32,6 +34,14 @@ public class CheckoutTask extends AsyncTask<Void, Void, Void> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         return;
+                    }
+                }).setIcon(android.R.drawable.ic_dialog_alert);
+        successfullCheckoutDialog = new AlertDialog.Builder(contactDetailsActivity)
+                .setTitle("Оформление заказа")
+                .setMessage(contactDetailsActivity.getString(R.string.please_fill_the_field))
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Navigator.goToCategories(contactDetailsActivity);
                     }
                 }).setIcon(android.R.drawable.ic_dialog_alert);
     }
@@ -54,8 +64,8 @@ public class CheckoutTask extends AsyncTask<Void, Void, Void> {
         if(!"0".equals(checkout.getErrorCode())) {
             emptyFieldDialog.setMessage(checkout.getError()).setIcon(android.R.drawable.ic_dialog_alert).show();
         } else {
-            //TODO handle successfull checkout
-            emptyFieldDialog.setMessage(checkout.getError()).setIcon(android.R.drawable.ic_dialog_info).show();
+            CartHolder.getCart().clear();
+            successfullCheckoutDialog.setMessage(checkout.getError()).setIcon(android.R.drawable.ic_dialog_info).show();
         }
     }
 

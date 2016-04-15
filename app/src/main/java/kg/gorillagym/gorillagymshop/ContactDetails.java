@@ -92,18 +92,19 @@ public class ContactDetails extends AppCompatActivityWithBackButton {
                                     editor.putString(ADDRESS_FIELD, address);
                                     editor.putString(PHONE_FIELD, phone);
                                     editor.apply();
+                                    doCheckout(email, name, address, phone, capture);
                                 }
                             }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            return;
+                            doCheckout(email, name, address, phone, capture);
                         }
                     })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
+                } else {
+                    doCheckout(email, name, address, phone, capture);
                 }
-                ClientData clientData = new GorillaGymClientData(email, name, phone, address, token, capture);
-                new CheckoutTask(ContactDetails.this, clientData).execute();
             }
         });
         Button clearButton = (Button) findViewById(R.id.button_clear);
@@ -132,6 +133,11 @@ public class ContactDetails extends AppCompatActivityWithBackButton {
 
             }
         });
+    }
+
+    private void doCheckout(String email, String name, String address, String phone, String capture) {
+        ClientData clientData = new GorillaGymClientData(email, name, phone, address, token, capture);
+        new CheckoutTask(ContactDetails.this, clientData).execute();
     }
 
     private boolean validateForEmptyFields(String email, String name, String address, String phone, String capture, EditText emailField, EditText nameField, EditText addressField, EditText phoneField, EditText captureField) {
