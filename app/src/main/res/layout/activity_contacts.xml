@@ -13,21 +13,42 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Контакты"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="
-100 PUDOV\n
 тел: 0772 18-20-73\n
         0702 66-67-46\n
-email: time_and_i@mail.ru\n
-\n
-Режим работы\n
-\n
-Понедельник - Суббота\n
+email: time_and_i@mail.ru\n" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Режим работы"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=
+"Понедельник - Суббота\n
 10-00 - 19-00\n
 Воскресенье\n
-12-30 - 19-30 (0552 552 675)\n
-\n
-Адрес\n
-5мкр д. 4/2 (ул. Донецкая/Карла Маркса) \n\n" />
+12-30 - 19-30 (0552 552 675)\n"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Адрес"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5мкр д. 4/2 (ул. Донецкая/Карла Маркса) \n"/>
 
         <ImageView
             android:id="@+id/mapImage"
