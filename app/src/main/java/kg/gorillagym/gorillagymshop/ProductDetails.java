@@ -16,6 +16,7 @@ import android.widget.Toast;
 import org.kefirsf.bb.BBProcessorFactory;
 import org.kefirsf.bb.TextProcessor;
 
+import kg.gorillagym.gorillagymshop.async.ProductDetailsLoaderTask;
 import kg.gorillagym.gorillagymshop.async.URLImageParser;
 import kg.gorillagym.gorillagymshop.cache.CacheHolder;
 import kg.gorillagym.gorillagymshop.cart.CartHolder;
@@ -65,19 +66,7 @@ public class ProductDetails extends AppCompatActivityWithBackButton {
                 oldPrice.setText(product.getOldprice() + " " + getString(R.string.currency));
             }
         }
-
-        Button addToCart = (Button) findViewById(R.id.add_to_cart);
-        addToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CartHolder.getCart().add(product, 1);
-                String text = String.format(getString(R.string.added_to_cart), product.getName());
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(ProductDetails.this, text, duration);
-                toast.show();
-                CacheHolder.getCache().putCart(MainActivity.CART_CACHE_NAME, CartHolder.getCart());
-            }
-        });
+        new ProductDetailsLoaderTask(product.getId(), this).execute();
     }
 
     @Override
