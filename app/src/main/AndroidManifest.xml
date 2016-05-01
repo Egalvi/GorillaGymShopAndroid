@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kg.gorillagym.gorillagymshop" >
+    package="kg.stopudov.stopudovshop" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="kg.stopudov.stopudovshop.MainActivity"
             android:label="@string/shop_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,23 +20,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProductList"
+            android:name="kg.stopudov.stopudovshop.ProductList"
             android:label="@string/title_activity_product_list" >
         </activity>
         <activity
-            android:name=".ContactsActivity"
+            android:name="kg.stopudov.stopudovshop.ContactsActivity"
             android:label="Наши контакты" >
         </activity>
         <activity
-            android:name=".ProductDetails"
+            android:name="kg.stopudov.stopudovshop.ProductDetails"
             android:label="@string/title_activity_product_details" >
         </activity>
         <activity
-            android:name=".CartActivity"
+            android:name="kg.stopudov.stopudovshop.CartActivity"
             android:label="@string/title_activity_cart" >
         </activity>
         <activity
-            android:name=".ContactDetails"
+            android:name="kg.stopudov.stopudovshop.ContactDetails"
             android:label="@string/title_activity_contact_details" >
         </activity>
     </application>
