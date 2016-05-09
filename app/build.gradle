@@ -25,7 +25,7 @@ android {
     buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "kg.gorillagym.gorillagymshop"
+        applicationId "kg.stopudov"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
