@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:scrollbars="vertical"
-    tools:context="kg.gorillagym.gorillagymshop.CartActivity">
+    tools:context="kg.stopudov.stopudovshop.CartActivity">
 
     <TextView
         android:id="@+id/cartMessage"
@@ -33,12 +33,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/total_price"
+            android:textStyle="bold"
             android:gravity="right" />
 
         <TextView
             android:id="@+id/cart_total_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
             android:gravity="right" />
 
         <LinearLayout
@@ -54,6 +57,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
+                android:layout_marginRight="2dp"
+                style="@style/ButtonStyle"
                 android:text="@string/button_clear_cart" />
 
             <Button
@@ -62,6 +67,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
+                android:layout_marginRight="2dp"
+                style="@style/ButtonStyle"
                 android:text="@string/button_checkout" />
         </LinearLayout>
 

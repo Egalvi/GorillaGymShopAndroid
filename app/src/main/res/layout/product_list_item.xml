@@ -9,7 +9,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_vertical"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:background="@drawable/border" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -17,19 +18,22 @@
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
-        <Button
+        <TextView
             android:id="@+id/product_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_toRightOf="@id/product_image" />
+            android:gravity="left" />
 
+        <!--TODO extract styles -->
         <TextView
             android:id="@+id/product_price"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp" />
+            android:layout_margin="5dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            android:gravity="left" />
     </LinearLayout>
 
 </LinearLayout>
