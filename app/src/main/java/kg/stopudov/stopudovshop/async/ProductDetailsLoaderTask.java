@@ -13,6 +13,7 @@ import kg.stopudov.stopudovshop.cache.CacheHolder;
 import kg.stopudov.stopudovshop.cart.CartHolder;
 import kg.gorillagym.shop.content.cachedpicture.Cache;
 import kg.gorillagym.shop.content.cachedpicture.GorillaGymProductService;
+import kg.stopudov.stopudovshop.error.NoConnectionErrorDialog;
 import ru.egalvi.shop.gorillagym.model.Product;
 import ru.egalvi.shop.gorillagym.service.ProductService;
 
@@ -49,6 +50,7 @@ public class ProductDetailsLoaderTask extends AsyncTask<Void, Void, Void> {
         try {
             product = productService.getProduct(id);
         } catch (Exception e) {
+            product = null;
             //TODO java.net.UnknownHostException: Unable to resolve host if internet is OFF
         }
         return null;
@@ -63,6 +65,10 @@ public class ProductDetailsLoaderTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        if(product == null){
+            NoConnectionErrorDialog.getInstance(productActivity);
+            return;
+        }
         productActivity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
         Button addToCart = (Button) productActivity.findViewById(R.id.add_to_cart);
         if(Integer.parseInt(product.getNumber()) > 0) {

@@ -18,6 +18,7 @@ import kg.stopudov.stopudovshop.cache.CacheHolder;
 import kg.stopudov.stopudovshop.cache.impl.CacheImpl;
 import kg.gorillagym.shop.content.cachedpicture.Cache;
 import kg.gorillagym.shop.content.cachedpicture.GorillaGymCategoryService;
+import kg.stopudov.stopudovshop.error.NoConnectionErrorDialog;
 import ru.egalvi.shop.gorillagym.model.Category;
 import ru.egalvi.shop.gorillagym.model.CategorySortComparator;
 import ru.egalvi.shop.gorillagym.service.CategoryService;
@@ -78,6 +79,10 @@ public class CategoryLoaderTask extends AsyncTask<Void, Void, Void> {
         super.onPostExecute(aVoid);
         CacheImpl.ProductCacheHolder productsCache = CacheHolder.getCache().getProducts(MainActivity.PRODUCTS_CACHE_NAME);
         productsCache = productsCache == null ? new CacheImpl.ProductCacheHolder() : productsCache;
+        if(categories == null){
+            NoConnectionErrorDialog.getInstance(categoryActivity);
+            return;
+        }
         for (Category category : categories) {
             if (!productsCache.getCategories().contains(category)) {
                 productsCache.add(category, null);

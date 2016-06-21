@@ -10,6 +10,7 @@ import java.util.Map;
 
 import kg.stopudov.stopudovshop.CartActivity;
 import kg.stopudov.stopudovshop.cache.CacheHolder;
+import kg.stopudov.stopudovshop.error.NoConnectionErrorDialog;
 import kg.stopudov.stopudovshop.navigation.Navigator;
 import kg.gorillagym.shop.content.cachedpicture.Cache;
 import kg.gorillagym.shop.content.cachedpicture.GorillaGymProductService;

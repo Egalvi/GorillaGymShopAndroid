@@ -13,31 +13,40 @@ import java.io.ByteArrayInputStream;
 import kg.gorillagym.shop.cart.GorillaGymCartService;
 import kg.stopudov.stopudovshop.ContactDetails;
 import kg.stopudov.stopudovshop.R;
+import kg.stopudov.stopudovshop.error.NoConnectionErrorDialog;
 import ru.egalvi.shop.Capture;
 
 public class CaptureLoaderTask extends AsyncTask<Void, Void, Void> {
     Capture capture;
     ContactDetails contactDetailsActivity;
 
-        public CaptureLoaderTask(ContactDetails contactDetailsActivity) {
-            this.contactDetailsActivity = contactDetailsActivity;
-        }
+    public CaptureLoaderTask(ContactDetails contactDetailsActivity) {
+        this.contactDetailsActivity = contactDetailsActivity;
+    }
 
-        @Override
-        protected Void doInBackground(Void... params) {
+    @Override
+    protected Void doInBackground(Void... params) {
+        try {
             capture = new GorillaGymCartService().getCapture();
-            return null;
+        } catch (Exception e) {
+            capture = null;
         }
+        return null;
+    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
         contactDetailsActivity.findViewById(R.id.capture_image).setVisibility(View.GONE);
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        if(capture == null){
+            NoConnectionErrorDialog.getInstance(contactDetailsActivity);
+            return;
+        }
         ImageView image = (ImageView) contactDetailsActivity.findViewById(R.id.capture_image);
         image.setVisibility(View.VISIBLE);
         int width = contactDetailsActivity.findViewById(R.id.edit_verification_code).getWidth();
